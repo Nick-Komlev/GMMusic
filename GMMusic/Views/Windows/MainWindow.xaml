@@ -6,11 +6,24 @@
         xmlns:l="clr-namespace:GMMusic"
         xmlns:vm="clr-namespace:GMMusic.ViewModels"
         Title="{Binding Title}" Height="450" Width="800">
-
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        
-    </Grid>
+    <TabControl>
+        <TabItem Header="Медиаплеер">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <GridSplitter Grid.Column="0"/>
+                <GridSplitter Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Треки"></TabItem>
+        <TabItem Header="Плейлисты"></TabItem>
+        <TabItem Header="Тэги"></TabItem>
+    </TabControl>
+
 </Window>
