@@ -10,6 +10,7 @@ namespace GMMusic
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            DBController.UploadData();
             base.OnStartup(e);
         }
     }

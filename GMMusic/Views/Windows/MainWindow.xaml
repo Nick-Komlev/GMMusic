@@ -5,25 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:GMMusic"
         xmlns:vm="clr-namespace:GMMusic.ViewModels"
-        Title="{Binding Title}" Height="450" Width="800">
+        xmlns:m="clr-namespace:GMMusic.Models"
+        xmlns:db="clr-namespace:GMMusic.Infrastructure"
+        Title="{Binding Title}" Height="800" Width="1200">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <TabControl>
-        <TabItem Header="Медиаплеер">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <GridSplitter Grid.Column="0"/>
-                <GridSplitter Grid.Column="1"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Треки"></TabItem>
-        <TabItem Header="Плейлисты"></TabItem>
-        <TabItem Header="Тэги"></TabItem>
-    </TabControl>
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл" TextBlock.FontSize="14"></MenuItem>
+            <MenuItem Header="Справка" TextBlock.FontSize="14"></MenuItem>
+        </Menu>
+        <StackPanel DockPanel.Dock="Bottom" Height="24"></StackPanel>
+        <TabControl>
+            <TabItem Header="Медиаплеер">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter Grid.Column="0"/>
+                    <GridSplitter Grid.Column="1"/>
+                    <ListBox x:Name="TrackBrowserListBox" Grid.Column="2"
+                         ItemsSource="{Binding Tracks}"
+                         ItemTemplate="{StaticResource TrackBrowserDataTemplate}">
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Треки"></TabItem>
+            <TabItem Header="Плейлисты"></TabItem>
+            <TabItem Header="Тэги"></TabItem>
+        </TabControl>
+    </DockPanel>
+    
 
 </Window>

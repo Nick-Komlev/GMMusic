@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GMMusic.ViewModels.Base;
+using GMMusic.Models;
 using GMMusic.Infrastructure;
 
 namespace GMMusic.ViewModels
@@ -24,5 +25,15 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        public List<Track> Tracks { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<Playlist> Playlists { get; set; }
+
+        public MainWindowViewModel()
+        {
+            Tracks = DBController.Tracks;
+            Tags = DBController.Tags;
+            Playlists = DBController.Playlists;
+        }
     }
 }
