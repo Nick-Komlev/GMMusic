@@ -8,7 +8,7 @@ using GMMusic.Models;
 
 namespace GMMusic.Infrastructure
 {
-    internal class MyDBContext : DbContext
+    public class MyDBContext : DbContext
     {
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Tag> Tags { get; set; }

@@ -7,6 +7,6 @@ namespace GMMusic.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Track> Tracks { get; set; } = new List<Track>();
+        public virtual List<Track> Tracks { get; set; } = new List<Track>();
     }
 }

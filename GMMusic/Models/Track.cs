@@ -7,10 +7,11 @@ namespace GMMusic.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Duration { get; set; }
+        public TimeSpan Duration { get; set; }
         public string SourcePath { get; set; }
         public bool  IsAmbience { get; set; }
 
-        public List<Tag> Tags { get; set; } = new List<Tag>();
+        public virtual List<Tag> Tags { get; set; } = new List<Tag>();
+        public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
     }
 }
