@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resourses\Styles\GridSplitter\GridSplitterStyleDictionary.xaml"/>
-                <ResourceDictionary Source="Resourses\Styles\TabControl\TabItemStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Resourses\Styles\GridSplitterStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Resourses\Styles\TabItemStyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
