@@ -13,5 +13,10 @@ namespace GMMusic.Infrastructure
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
+
+        public MyDBContext() : base("DBConnection")
+        {
+
+        }
     }
 }

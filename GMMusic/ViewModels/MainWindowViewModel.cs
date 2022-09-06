@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GMMusic.ViewModels.Base;
+using GMMusic.Infrastructure;
 
 namespace GMMusic.ViewModels
 {
@@ -22,5 +23,6 @@ namespace GMMusic.ViewModels
         }
 
         #endregion
+
     }
 }
