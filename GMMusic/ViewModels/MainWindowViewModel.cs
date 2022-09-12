@@ -33,7 +33,6 @@ namespace GMMusic.ViewModels
         {
             Tracks = DBController.Tracks;
             Tags = DBController.Tags;
-            Playlists = DBController.Playlists;
-        }
+            Playlists = DBController.Playlists;        }
     }
 }

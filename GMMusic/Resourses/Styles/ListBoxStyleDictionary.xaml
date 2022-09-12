@@ -2,13 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="TrackBrowserDataTemplate" DataType="ListBox.ItemTemplate">
-        <Grid>
+        <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Duration}" Grid.Column="1" Padding="10,0" HorizontalAlignment="Right"/>
             <TextBlock Text="{Binding Name}" />
-            <TextBlock Text="{Binding Duration}" Grid.Column="1" Padding="10,0"/>
         </Grid>
     </DataTemplate>
+
+    <Style TargetType="ListBox">
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+   
 </ResourceDictionary>
