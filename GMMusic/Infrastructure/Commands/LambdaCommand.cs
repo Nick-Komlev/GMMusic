@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TRPGSystem.Commands
+namespace GMMusic.Infrastructure.Commands
 {
     internal class LambdaCommand : BaseCommand
     {

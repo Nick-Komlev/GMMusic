@@ -13,5 +13,10 @@ namespace GMMusic.Models
 
         public virtual List<Tag> Tags { get; set; } = new List<Tag>();
         public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

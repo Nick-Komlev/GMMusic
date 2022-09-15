@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:l="clr-namespace:GMMusic"
         xmlns:vm="clr-namespace:GMMusic.ViewModels"
         xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
@@ -43,7 +43,12 @@
                     <ListBox x:Name="TrackBrowserListBox" Grid.Column="2" Style="{StaticResource TrackBrowserStyle}"
                          ItemsSource="{Binding Tracks}"
                          ItemTemplate="{StaticResource TrackBrowserDataTemplate}"
-                         >
+                         SelectedItem="{Binding SelectedBrowserTrack}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding TrackAddCommand}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ListBox>
                 </Grid>
             </TabItem>

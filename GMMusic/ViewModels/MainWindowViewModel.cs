@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using GMMusic.ViewModels.Base;
 using GMMusic.Models;
 using GMMusic.Infrastructure;
-using System.Windows.Media;
+using GMMusic.Infrastructure.Commands;
+using System.Windows.Input;
 
 namespace GMMusic.ViewModels
 {
@@ -40,19 +40,57 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        public List<Track> Tracks { get; set; }
-        public List<Tag> Tags { get; set; }
-        public List<Playlist> Playlists { get; set; }
+        #region Свойство выбранного в браузере трэка
 
-        public List<MyMediaPlayer> MediaPlayers { get; set; } = new List<MyMediaPlayer>() {
-            new MyMediaPlayer(0),
+        private Track _SelectedBrowserTrack;
+
+        /// <summary>Выбранный в браузере трэк</summary>
+
+        public Track SelectedBrowserTrack
+        {
+            get => _SelectedBrowserTrack;
+            set => Set(ref _SelectedBrowserTrack, value);
+        }
+
+        #endregion
+
+        #region Команда добавления выбранного трэка в плейлист медиаплеера
+
+        public ICommand TrackAddCommand { get; set; }
+
+        public bool CanTrackAddCommandExecute(object p) => true;
+
+        public void OnTrackAddCommandExecuted(object p)
+        {
+            if (!SelectedTrackMediaPlayer.Tracks.Contains(SelectedBrowserTrack))
+            {
+                SelectedTrackMediaPlayer.Tracks.Add(SelectedBrowserTrack);
+            }
+                
+        }
+
+        #endregion
+
+        #region Свойство списка медиаплееров
+
+        private List<MyMediaPlayer> _MediaPlayers = new List<MyMediaPlayer>() { 
+            new MyMediaPlayer(0), 
             new MyMediaPlayer(1), 
             new MyMediaPlayer(2) };
 
-        public List<List<Track>> MediaPlayerPlaylists = new List<List<Track>>() { 
-            new List<Track>(), 
-            new List<Track>(), 
-            new List<Track>() };
+        /// <summary>Список медиаплееров</summary>
+
+        public List<MyMediaPlayer> MediaPlayers
+        {
+            get => _MediaPlayers;
+            set => Set(ref _MediaPlayers, value);
+        }
+
+        #endregion
+
+        public List<Track> Tracks { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<Playlist> Playlists { get; set; }
 
         public MainWindowViewModel()
         {
@@ -61,6 +99,8 @@ namespace GMMusic.ViewModels
             Playlists = DBController.Playlists;
 
             SelectedTrackMediaPlayer = MediaPlayers[0];
+            TrackAddCommand = new LambdaCommand(OnTrackAddCommandExecuted, CanTrackAddCommandExecute);
         }
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TRPGSystem.Commands
+namespace GMMusic.Infrastructure.Commands
 {
     internal abstract class BaseCommand : ICommand
     {
