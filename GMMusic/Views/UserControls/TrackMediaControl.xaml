@@ -28,7 +28,8 @@
             <Button Margin="5,12">
                 <fa:ImageAwesome Icon="Solid_CircleNotch"></fa:ImageAwesome>
             </Button>
-            <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Неизвестен - Без имени"></TextBlock>
+            <TextBlock VerticalAlignment="Center" Margin="5,0" 
+                       Text="{Binding MediaPlayer.Id, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}}"></TextBlock>
         </StackPanel>
         <ProgressBar Grid.Row="1" Margin="5,10" Value="25" Foreground="DarkOrange"/>
         <ProgressBar Grid.Column="1" Margin="5" Value="25" Foreground="DarkOrange" Grid.RowSpan="2" Orientation="Vertical"/>

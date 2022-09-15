@@ -1,25 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GMMusic.Models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GMMusic.Views.UserControls
 {
-    /// <summary>
-    /// Логика взаимодействия для TrackMediaControl.xaml
-    /// </summary>
     public partial class TrackMediaControl : UserControl
     {
+        public static readonly DependencyProperty MediaPlayerProperty = 
+            DependencyProperty.Register(
+                "MediaPlayer",
+                typeof(MyMediaPlayer),
+                typeof(TrackMediaControl),
+                new FrameworkPropertyMetadata(
+                        null,
+                        FrameworkPropertyMetadataOptions.AffectsMeasure |
+                        FrameworkPropertyMetadataOptions.AffectsRender,
+                        new PropertyChangedCallback(OnMediaPlayerChanged),
+                        new CoerceValueCallback(CoerceMediaPlayer)));
+
+        public MyMediaPlayer MediaPlayer
+        {
+            get { return (MyMediaPlayer)GetValue(MediaPlayerProperty); }
+            set { SetValue(MediaPlayerProperty, value); }
+        }
+
+        private static object CoerceMediaPlayer(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+
+        private static void OnMediaPlayerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            return;
+        }
+
         public TrackMediaControl()
         {
             InitializeComponent();

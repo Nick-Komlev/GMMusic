@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:GMMusic"
         xmlns:vm="clr-namespace:GMMusic.ViewModels"
+        xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
         xmlns:m="clr-namespace:GMMusic.Models"
         xmlns:db="clr-namespace:GMMusic.Infrastructure"
         Title="{Binding Title}" Height="800" Width="1200">
@@ -27,7 +28,12 @@
                     </Grid.ColumnDefinitions>
                     <GridSplitter Grid.Column="0"/>
                     <GridSplitter Grid.Column="1"/>
-                    <ListBox x:Name="TrackBrowserListBox" Grid.Column="2"
+                    <ListBox ItemsSource="{Binding MediaPlayers}"
+                             ItemTemplate="{StaticResource TrackMediaPlayerListDataTemplate}"
+                             Style="{StaticResource TrackBrowserStyle}">
+                        
+                    </ListBox>
+                    <ListBox x:Name="TrackBrowserListBox" Grid.Column="2" Style="{StaticResource TrackBrowserStyle}"
                          ItemsSource="{Binding Tracks}"
                          ItemTemplate="{StaticResource TrackBrowserDataTemplate}">
                     </ListBox>

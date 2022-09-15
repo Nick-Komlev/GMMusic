@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GMMusic.ViewModels.Base;
 using GMMusic.Models;
 using GMMusic.Infrastructure;
+using System.Windows.Media;
 
 namespace GMMusic.ViewModels
 {
@@ -28,6 +29,13 @@ namespace GMMusic.ViewModels
         public List<Track> Tracks { get; set; }
         public List<Tag> Tags { get; set; }
         public List<Playlist> Playlists { get; set; }
+
+        public List<MyMediaPlayer> MediaPlayers { get; set; } = new List<MyMediaPlayer>() {
+                                                                                            new MyMediaPlayer(0),
+                                                                                            new MyMediaPlayer(1),
+                                                                                            new MyMediaPlayer(2) };
+
+        public List<List<Track>> MediaPlayerPlaylists = new List<List<Track>>() { new List<Track>(), new List<Track>(), new List<Track>()};
 
         public MainWindowViewModel()
         {

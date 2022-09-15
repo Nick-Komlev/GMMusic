@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Infrastructure\DBController.cs" />
     <Compile Include="Infrastructure\MyDBContext.cs" />
+    <Compile Include="Models\MyMediaPlayer.cs" />
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Track.cs" />
