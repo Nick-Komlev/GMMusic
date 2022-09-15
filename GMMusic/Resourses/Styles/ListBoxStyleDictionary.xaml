@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:m="clr-namespace:GMMusic.Models">
 
     <DataTemplate x:Key="TrackBrowserDataTemplate" DataType="m:Track">
@@ -11,6 +12,11 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Duration}" Grid.Column="1" Padding="10,0" HorizontalAlignment="Right"/>
             <TextBlock Text="{Binding Name}" />
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command=""></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </Grid>
     </DataTemplate>
 

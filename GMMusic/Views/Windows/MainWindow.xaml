@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:l="clr-namespace:GMMusic"
         xmlns:vm="clr-namespace:GMMusic.ViewModels"
         xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
@@ -30,12 +31,19 @@
                     <GridSplitter Grid.Column="1"/>
                     <ListBox ItemsSource="{Binding MediaPlayers}"
                              ItemTemplate="{StaticResource TrackMediaPlayerListDataTemplate}"
-                             Style="{StaticResource TrackBrowserStyle}">
+                             Style="{StaticResource TrackBrowserStyle}"
+                             SelectedItem="{Binding SelectedTrackMediaPlayer}">
                         
+                    </ListBox>
+                    <ListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
+                             ItemTemplate="{StaticResource TrackBrowserDataTemplate}"
+                             Style="{StaticResource TrackBrowserStyle}">
+
                     </ListBox>
                     <ListBox x:Name="TrackBrowserListBox" Grid.Column="2" Style="{StaticResource TrackBrowserStyle}"
                          ItemsSource="{Binding Tracks}"
-                         ItemTemplate="{StaticResource TrackBrowserDataTemplate}">
+                         ItemTemplate="{StaticResource TrackBrowserDataTemplate}"
+                         >
                     </ListBox>
                 </Grid>
             </TabItem>

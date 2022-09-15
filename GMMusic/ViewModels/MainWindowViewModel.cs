@@ -26,21 +26,41 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Свойство выбранной дорожки
+
+        private MyMediaPlayer _SelectedTrackMediaPlayer;
+
+        /// <summary>Выбранная дорожка</summary>
+
+        public MyMediaPlayer SelectedTrackMediaPlayer
+        {
+            get => _SelectedTrackMediaPlayer;
+            set => Set(ref _SelectedTrackMediaPlayer, value);
+        }
+
+        #endregion
+
         public List<Track> Tracks { get; set; }
         public List<Tag> Tags { get; set; }
         public List<Playlist> Playlists { get; set; }
 
         public List<MyMediaPlayer> MediaPlayers { get; set; } = new List<MyMediaPlayer>() {
-                                                                                            new MyMediaPlayer(0),
-                                                                                            new MyMediaPlayer(1),
-                                                                                            new MyMediaPlayer(2) };
+            new MyMediaPlayer(0),
+            new MyMediaPlayer(1), 
+            new MyMediaPlayer(2) };
 
-        public List<List<Track>> MediaPlayerPlaylists = new List<List<Track>>() { new List<Track>(), new List<Track>(), new List<Track>()};
+        public List<List<Track>> MediaPlayerPlaylists = new List<List<Track>>() { 
+            new List<Track>(), 
+            new List<Track>(), 
+            new List<Track>() };
 
         public MainWindowViewModel()
         {
             Tracks = DBController.Tracks;
             Tags = DBController.Tags;
-            Playlists = DBController.Playlists;        }
+            Playlists = DBController.Playlists;
+
+            SelectedTrackMediaPlayer = MediaPlayers[0];
+        }
     }
 }
