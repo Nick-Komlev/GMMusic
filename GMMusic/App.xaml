@@ -6,10 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resourses\Styles\GridSplitterStyleDictionary.xaml"/>
-                <ResourceDictionary Source="Resourses\Styles\TabItemStyleDictionary.xaml"/>
-                <ResourceDictionary Source="Resourses\Styles\GridViewStyleDictionary.xaml"/>
-                <ResourceDictionary Source="Resourses\Styles\ListBoxStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Resourses\Styles\MainTheme.xaml"/>
+                <ResourceDictionary Source="Resourses\Templates\ListBoxTemplateDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

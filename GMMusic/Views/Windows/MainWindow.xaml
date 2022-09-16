@@ -9,12 +9,16 @@
         xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
         xmlns:m="clr-namespace:GMMusic.Models"
         xmlns:db="clr-namespace:GMMusic.Infrastructure"
-        Title="{Binding Title}" Height="800" Width="1200">
+        Title="{Binding Title}" Height="800" Width="1200"
+        Style="{StaticResource MyWindow}">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel LastChildFill="True">
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" Background="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:MainWindow}}}">
             <MenuItem Header="Файл" TextBlock.FontSize="14"></MenuItem>
             <MenuItem Header="Справка" TextBlock.FontSize="14"></MenuItem>
         </Menu>
@@ -23,27 +27,28 @@
             <TabItem Header="Медиаплеер">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="116*"/>
+                        <ColumnDefinition Width="279*"/>
+                        <ColumnDefinition Width="396*"/>
+                        <ColumnDefinition Width="395*"/>
                     </Grid.ColumnDefinitions>
-                    <GridSplitter Grid.Column="0"/>
                     <GridSplitter Grid.Column="1"/>
+                    <GridSplitter Grid.Column="2"/>
                     <ListBox ItemsSource="{Binding MediaPlayers}"
-                             ItemTemplate="{StaticResource TrackMediaPlayerListDataTemplate}"
                              Style="{StaticResource TrackBrowserStyle}"
-                             SelectedItem="{Binding SelectedTrackMediaPlayer}">
-                        
+                             ItemContainerStyle="{StaticResource TrackMediaPlayerListContainerStyle}"
+                             SelectedItem="{Binding SelectedTrackMediaPlayer}" Grid.ColumnSpan="2">
                     </ListBox>
-                    <ListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
-                             ItemTemplate="{StaticResource TrackBrowserDataTemplate}"
-                             Style="{StaticResource TrackBrowserStyle}">
 
+                    <ListBox Grid.Column="2" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
+                             Style="{StaticResource MediaPlayerPlaylistStyle}"
+                             ItemContainerStyle="{StaticResource MediaPlayerPlaylistContainerStyle}">
                     </ListBox>
-                    <ListBox x:Name="TrackBrowserListBox" Grid.Column="2" Style="{StaticResource TrackBrowserStyle}"
+                    
+                    <ListBox x:Name="TrackBrowserListBox" Grid.Column="3" Style="{StaticResource TrackBrowserStyle}"
                          ItemsSource="{Binding Tracks}"
-                         ItemTemplate="{StaticResource TrackBrowserDataTemplate}"
-                         SelectedItem="{Binding SelectedBrowserTrack}">
+                         SelectedItem="{Binding SelectedBrowserTrack}"
+                         ItemContainerStyle="{StaticResource TrackBrowserContainerStyle}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding TrackAddCommand}"></i:InvokeCommandAction>
@@ -57,6 +62,6 @@
             <TabItem Header="Тэги"></TabItem>
         </TabControl>
     </DockPanel>
-    
+
 
 </Window>

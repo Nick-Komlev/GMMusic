@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GMMusic.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              d:DesignHeight="100" d:DesignWidth="400">
-    <Grid Background="White">
+    <Grid Background="#00000000">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -31,7 +31,11 @@
             <TextBlock VerticalAlignment="Center" Margin="5,0" 
                        Text="{Binding MediaPlayer.CurrentTrack.Name, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}}"/>
         </StackPanel>
-        <ProgressBar Grid.Row="1" Margin="5,10" Value="25" Foreground="DarkOrange"/>
-        <ProgressBar Grid.Column="1" Margin="5" Value="25" Foreground="DarkOrange" Grid.RowSpan="2" Orientation="Vertical"/>
+        <ProgressBar Grid.Row="1" Margin="5,10" Value="25" 
+                     Foreground="{StaticResource YellowColor}" 
+                     Background="{StaticResource DarkBlueColor}"/>
+        <ProgressBar Grid.Column="1" Margin="5" Value="25" Grid.RowSpan="2" Orientation="Vertical"
+                     Foreground="{StaticResource YellowColor}" 
+                     Background="{StaticResource DarkBlueColor}"/>
     </Grid>
 </UserControl>

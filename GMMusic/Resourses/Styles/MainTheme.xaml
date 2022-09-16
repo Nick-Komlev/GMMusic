@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:l="clr-namespace:GMMusic">
+    
+    <SolidColorBrush x:Key="BlackColor" Color="#FF1E1E1E"/>
+    <SolidColorBrush x:Key="GrayColor" Color="#FF323232"/>
+    <SolidColorBrush x:Key="YellowColor" Color="#FFFFC92D"/>
+    <SolidColorBrush x:Key="OrangeColor" Color="#FFFB9F42"/>
+    <SolidColorBrush x:Key="LightPurpleColor" Color="#FF7C2CFD"/>
+    <SolidColorBrush x:Key="PurpleColor" Color="#FF5C1EBC"/>
+    <SolidColorBrush x:Key="DarkPurpleColor" Color="#FF503C7B"/>
+    <SolidColorBrush x:Key="DarkBlueColor" Color="#FF1F283B"/>
+    <SolidColorBrush x:Key="WhiteColor" Color="White"/>
+
+    <Style TargetType="Window" x:Key="MyWindow">
+        <Setter Property="Background" Value="{StaticResource GrayColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="Background" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
+        <Setter Property="TextBlock.FontSize" Value="14"/>
+    </Style>
+
+    <Style TargetType="TabControl">
+        <Setter Property="Background" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
+    </Style>
+
+    <Style TargetType="Menu">
+        <Setter Property="Background" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+    </Style>
+
+    <Style TargetType="MenuItem">
+        <Setter Property="Background" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+    </Style>
+
+    <Style x:Key="TrackBrowserStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource GrayColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
+    </Style>
+
+    <Style x:Key="MediaPlayerPlaylistStyle" TargetType="ListBox" BasedOn="{StaticResource TrackBrowserStyle}">
+        <Setter Property="Background" Value="{StaticResource DarkPurpleColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
+    </Style>
+
+    <Style TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource GrayColor}"/>
+    </Style>
+
+    <Style TargetType="GridSplitter">
+        <Setter Property="Width" Value="3"/>
+        <Setter Property="Panel.ZIndex" Value="100"/>
+        <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
+    </Style>
+
+</ResourceDictionary>
