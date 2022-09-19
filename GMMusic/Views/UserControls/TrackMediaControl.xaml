@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GMMusic.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              d:DesignHeight="100" d:DesignWidth="400">
-    <Grid Background="#00000000">
+    <Grid Background="{StaticResource TransparentColor}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

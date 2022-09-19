@@ -8,5 +8,10 @@ namespace GMMusic.Models
         public string Name { get; set; }
 
         public virtual List<Track> Tracks { get; set; } = new List<Track>();
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

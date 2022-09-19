@@ -11,6 +11,7 @@
     <SolidColorBrush x:Key="DarkPurpleColor" Color="#FF503C7B"/>
     <SolidColorBrush x:Key="DarkBlueColor" Color="#FF1F283B"/>
     <SolidColorBrush x:Key="WhiteColor" Color="White"/>
+    <SolidColorBrush x:Key="TransparentColor" Color="#00000000"/>
 
     <Style TargetType="Window" x:Key="MyWindow">
         <Setter Property="Background" Value="{StaticResource GrayColor}"/>

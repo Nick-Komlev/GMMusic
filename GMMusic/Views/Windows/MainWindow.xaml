@@ -10,7 +10,7 @@
         xmlns:m="clr-namespace:GMMusic.Models"
         xmlns:db="clr-namespace:GMMusic.Infrastructure"
         Title="{Binding Title}" Height="800" Width="1200"
-        Style="{StaticResource MyWindow}">
+        Style="{StaticResource MyWindow}" Name="mainWindow">
     <Window.Resources>
 
     </Window.Resources>
@@ -54,7 +54,7 @@
                             <UniformGrid Rows="2" DockPanel.Dock="Bottom">
                                 <ListBox ItemsSource="{Binding SelectedTags}"
                                          Style="{StaticResource TagListStyle}"
-                                         ItemContainerStyle="{StaticResource TagListContainerStyle}">
+                                         ItemContainerStyle="{StaticResource SelectedTagListContainerStyle}">
                                     
                                 </ListBox>
                                 <ListBox x:Name="TagBrowser"

@@ -126,6 +126,8 @@ namespace GMMusic.ViewModels
             set => Set(ref _SelectedTags, value);
         }
 
+
+
         #endregion
 
         #region Команда добавления выбранного трэка в плейлист медиаплеера
@@ -145,6 +147,41 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда добавления выбранного тэга в фильтр
+
+        public ICommand TagAddCommand { get; set; }
+
+        public bool CanTagAddCommandExecute(object p) => true;
+
+        public void OnTagAddCommandExecuted(object p)
+        {
+            var tag = Tags.First(t => t.Name == p.ToString());
+            if (!SelectedTags.Contains(tag))
+            {
+                SelectedTags.Add(tag);
+                OnPropertyChanged(nameof(SelectedTags));
+            }
+
+        }
+
+        #endregion
+
+        #region Команда удаления выбранного тэга из фильтра
+
+        public ICommand TagDeleteCommand { get; set; }
+
+        public bool CanTagDeleteCommandExecute(object p) => true;
+
+        public void OnTagDeleteCommandExecuted(object p)
+        {
+            var tag = SelectedTags.First(t => t.Name == p.ToString());
+            SelectedTags.Remove(tag);
+            OnPropertyChanged(nameof(SelectedTags));
+
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
@@ -153,6 +190,8 @@ namespace GMMusic.ViewModels
 
             SelectedTrackMediaPlayer = MediaPlayers[0];
             TrackAddCommand = new LambdaCommand(OnTrackAddCommandExecuted, CanTrackAddCommandExecute);
+            TagAddCommand = new LambdaCommand(OnTagAddCommandExecuted, CanTagAddCommandExecute);
+            TagDeleteCommand = new LambdaCommand(OnTagDeleteCommandExecuted, CanTagDeleteCommandExecute);
         }
 
     }
