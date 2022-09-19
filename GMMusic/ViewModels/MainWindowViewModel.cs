@@ -7,6 +7,7 @@ using GMMusic.Models;
 using GMMusic.Infrastructure;
 using GMMusic.Infrastructure.Commands;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace GMMusic.ViewModels
 {
@@ -54,23 +55,6 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Команда добавления выбранного трэка в плейлист медиаплеера
-
-        public ICommand TrackAddCommand { get; set; }
-
-        public bool CanTrackAddCommandExecute(object p) => true;
-
-        public void OnTrackAddCommandExecuted(object p)
-        {
-            if (!SelectedTrackMediaPlayer.Tracks.Contains(SelectedBrowserTrack))
-            {
-                SelectedTrackMediaPlayer.Tracks.Add(SelectedBrowserTrack);
-            }
-                
-        }
-
-        #endregion
-
         #region Свойство списка медиаплееров
 
         private List<MyMediaPlayer> _MediaPlayers = new List<MyMediaPlayer>() { 
@@ -88,15 +72,84 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        public List<Track> Tracks { get; set; }
-        public List<Tag> Tags { get; set; }
-        public List<Playlist> Playlists { get; set; }
+        #region Свойство списка трэков
+
+        private ICollection<Track> _Tracks = new ObservableCollection<Track>();
+
+        /// <summary>Список трэков</summary>
+
+        public ICollection<Track> Tracks
+        {
+            get => _Tracks;
+            set => Set(ref _Tracks, value);
+        }
+
+        #endregion
+
+        #region Свойство списка тэгов
+
+        private ICollection<Tag> _Tags = new ObservableCollection<Tag>();
+
+        /// <summary>Список тэгов</summary>
+
+        public ICollection<Tag> Tags
+        {
+            get => _Tags;
+            set => Set(ref _Tags, value);
+        }
+
+        #endregion
+
+        #region Свойство списка плейлистов
+
+        private ICollection<Playlist> _Playlists = new ObservableCollection<Playlist>();
+
+        /// <summary>Список плейлистов</summary>
+
+        public ICollection<Playlist> Playlists
+        {
+            get => _Playlists;
+            set => Set(ref _Playlists, value);
+        }
+
+        #endregion
+
+        #region Свойство списка выбранных тэгов
+
+        private ICollection<Tag> _SelectedTags = new ObservableCollection<Tag>();
+
+        /// <summary>Список выбранных тэгов</summary>
+
+        public ICollection<Tag> SelectedTags
+        {
+            get => _SelectedTags;
+            set => Set(ref _SelectedTags, value);
+        }
+
+        #endregion
+
+        #region Команда добавления выбранного трэка в плейлист медиаплеера
+
+        public ICommand TrackAddCommand { get; set; }
+
+        public bool CanTrackAddCommandExecute(object p) => true;
+
+        public void OnTrackAddCommandExecuted(object p)
+        {
+            if (!SelectedTrackMediaPlayer.Tracks.Contains(SelectedBrowserTrack))
+            {
+                SelectedTrackMediaPlayer.Tracks.Add(SelectedBrowserTrack);
+            }
+
+        }
+
+        #endregion
 
         public MainWindowViewModel()
         {
-            Tracks = DBController.Tracks;
-            Tags = DBController.Tags;
-            Playlists = DBController.Playlists;
+            Tracks = new ObservableCollection<Track>(DBController.Tracks);
+            Tags = new ObservableCollection<Tag>(DBController.Tags);
+            Playlists = new ObservableCollection<Playlist>(DBController.Playlists);
 
             SelectedTrackMediaPlayer = MediaPlayers[0];
             TrackAddCommand = new LambdaCommand(OnTrackAddCommandExecuted, CanTrackAddCommandExecute);

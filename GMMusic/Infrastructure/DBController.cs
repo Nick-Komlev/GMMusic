@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace GMMusic.Infrastructure
     public static class DBController
     {
         public static MyDBContext DBContext { get; set; }
-        public static List<Track> Tracks { get; set; }
-        public static List<Tag> Tags { get; set; }
-        public static List<Playlist> Playlists { get; set; }
+        public static ICollection<Track> Tracks { get; set; }
+        public static ICollection<Tag> Tags { get; set; }
+        public static ICollection<Playlist> Playlists { get; set; }
 
         static DBController()
         {

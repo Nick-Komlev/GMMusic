@@ -12,7 +12,7 @@
         Title="{Binding Title}" Height="800" Width="1200"
         Style="{StaticResource MyWindow}">
     <Window.Resources>
-        
+
     </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -27,8 +27,8 @@
             <TabItem Header="Медиаплеер">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="116*"/>
-                        <ColumnDefinition Width="279*"/>
+                        <ColumnDefinition Width="195*"/>
+                        <ColumnDefinition Width="200*"/>
                         <ColumnDefinition Width="396*"/>
                         <ColumnDefinition Width="395*"/>
                     </Grid.ColumnDefinitions>
@@ -44,17 +44,39 @@
                              Style="{StaticResource MediaPlayerPlaylistStyle}"
                              ItemContainerStyle="{StaticResource MediaPlayerPlaylistContainerStyle}">
                     </ListBox>
-                    
-                    <ListBox x:Name="TrackBrowserListBox" Grid.Column="3" Style="{StaticResource TrackBrowserStyle}"
+
+                    <DockPanel Grid.Column="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <DockPanel DockPanel.Dock="Top">
+                                <Button DockPanel.Dock="Right">Фильтр</Button>
+                                <TextBox Text="Поиск" HorizontalAlignment="Stretch"></TextBox>
+                            </DockPanel>
+                            <UniformGrid Rows="2" DockPanel.Dock="Bottom">
+                                <ListBox ItemsSource="{Binding SelectedTags}"
+                                         Style="{StaticResource TagListStyle}"
+                                         ItemContainerStyle="{StaticResource TagListContainerStyle}">
+                                    
+                                </ListBox>
+                                <ListBox x:Name="TagBrowser"
+                                         ItemsSource="{Binding Tags}"
+                                         Style="{StaticResource TagListStyle}"
+                                         ItemContainerStyle="{StaticResource TagListContainerStyle}">
+                                    
+                                </ListBox>
+                            </UniformGrid>
+                        </DockPanel>
+                        <ListBox x:Name="TrackBrowserListBox" Style="{StaticResource TrackBrowserStyle}"
                          ItemsSource="{Binding Tracks}"
                          SelectedItem="{Binding SelectedBrowserTrack}"
                          ItemContainerStyle="{StaticResource TrackBrowserContainerStyle}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding TrackAddCommand}"></i:InvokeCommandAction>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListBox>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding TrackAddCommand}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+                    </DockPanel>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Треки"></TabItem>

@@ -46,6 +46,19 @@
         <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
     </Style>
 
+    <Style x:Key="TagListStyle" TargetType="ListBox" BasedOn="{StaticResource TrackBrowserStyle}">
+        <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{Binding Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox, AncestorLevel=1}}"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+    </Style>
+
     <Style x:Key="MediaPlayerPlaylistStyle" TargetType="ListBox" BasedOn="{StaticResource TrackBrowserStyle}">
         <Setter Property="Background" Value="{StaticResource DarkPurpleColor}"/>
         <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
