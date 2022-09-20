@@ -9,6 +9,7 @@
         xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
         xmlns:m="clr-namespace:GMMusic.Models"
         xmlns:db="clr-namespace:GMMusic.Infrastructure"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         Title="{Binding Title}" Height="800" Width="1200"
         Style="{StaticResource MyWindow}" Name="mainWindow">
     <Window.Resources>
@@ -48,23 +49,32 @@
                     <DockPanel Grid.Column="3" HorizontalAlignment="Stretch" LastChildFill="True">
                         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="True">
                             <DockPanel DockPanel.Dock="Top">
-                                <Button DockPanel.Dock="Right">Фильтр</Button>
-                                <TextBox Text="Поиск" HorizontalAlignment="Stretch"></TextBox>
+                                <fa:ImageAwesome Icon="Solid_Search" DockPanel.Dock="Left"
+                                             Foreground="{StaticResource WhiteColor}" Margin="8,0" Height="14"/>
+                                <Button DockPanel.Dock="Right" 
+                                    Command="{Binding FilterRevealCommand}" 
+                                    CommandParameter="{Binding ElementName=FilterUGrid}">
+                                    <fa:ImageAwesome Icon="Solid_Filter" Foreground="{StaticResource LightPurpleColor}" Height="20"/>
+                                </Button>
+                                <TextBox HorizontalAlignment="Stretch"
+                                         VerticalContentAlignment="Center"
+                                         Foreground="{StaticResource WhiteColor}"></TextBox>
                             </DockPanel>
-                            <UniformGrid Rows="2" DockPanel.Dock="Bottom">
+                            <UniformGrid Name="FilterUGrid" Rows="2" DockPanel.Dock="Bottom" Visibility="Collapsed">
                                 <ListBox ItemsSource="{Binding SelectedTags}"
                                          Style="{StaticResource TagListStyle}"
                                          ItemContainerStyle="{StaticResource SelectedTagListContainerStyle}">
-                                    
+
                                 </ListBox>
                                 <ListBox x:Name="TagBrowser"
                                          ItemsSource="{Binding Tags}"
                                          Style="{StaticResource TagListStyle}"
                                          ItemContainerStyle="{StaticResource TagListContainerStyle}">
-                                    
+
                                 </ListBox>
                             </UniformGrid>
                         </DockPanel>
+
                         <ListBox x:Name="TrackBrowserListBox" Style="{StaticResource TrackBrowserStyle}"
                          ItemsSource="{Binding Tracks}"
                          SelectedItem="{Binding SelectedBrowserTrack}"
@@ -79,7 +89,61 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Треки"></TabItem>
+            <TabItem Header="Треки">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="123*"/>
+                        <ColumnDefinition Width="734*"/>
+                        <ColumnDefinition Width="296*"/>
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter Grid.Column="2"/>
+                    <DockPanel Grid.ColumnSpan="3">
+                        <UniformGrid Columns="2" Height="30" Margin="2" DockPanel.Dock="Top">
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_PlusSquare" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_TrashAlt" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_Save" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                            </StackPanel>
+                            <DockPanel>
+                                <fa:ImageAwesome Icon="Solid_Search" DockPanel.Dock="Left"
+                                                 Foreground="{StaticResource WhiteColor}" Margin="8,0" Height="14"/>
+                                <Button DockPanel.Dock="Right">
+                                    <fa:ImageAwesome Icon="Solid_Filter" Foreground="{StaticResource LightPurpleColor}" Height="20"/>
+                                </Button>
+                                <TextBox HorizontalAlignment="Stretch"
+                                         VerticalContentAlignment="Center"
+                                         Foreground="{StaticResource WhiteColor}"></TextBox>
+                            </DockPanel>
+                        </UniformGrid>
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                              ItemsSource="{Binding Tracks}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Path" Binding="{Binding SourcePath}"/>
+                                <DataGridTextColumn Header="Tags" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+
+                    <ListBox Grid.Column="3"
+                             ItemsSource="{Binding Tags}"
+                             Style="{StaticResource TagListStyle}"
+                             ItemContainerStyle="{StaticResource ButtonlessTagListContainerStyle}"
+                             Height="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                     AncestorType=Grid, 
+                                                                                     AncestorLevel=1}}">
+
+                    </ListBox>
+                </Grid>
+            </TabItem>
             <TabItem Header="Плейлисты"></TabItem>
             <TabItem Header="Тэги"></TabItem>
         </TabControl>

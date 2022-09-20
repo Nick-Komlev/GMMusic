@@ -155,4 +155,29 @@
         </Setter>
     </Style>
 
+    <DataTemplate x:Key="ButtonlessTagDataTemplate" DataType="m:Tag">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
+              Background="{StaticResource OrangeColor}">
+            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
+        </StackPanel>
+    </DataTemplate>
+
+    <Style x:Key="ButtonlessTagListContainerStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="ContentTemplate" Value="{StaticResource ButtonlessTagDataTemplate}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="2"
+                            Margin="2"
+                            BorderThickness="0">
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

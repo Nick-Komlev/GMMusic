@@ -7,7 +7,9 @@ using GMMusic.Models;
 using GMMusic.Infrastructure;
 using GMMusic.Infrastructure.Commands;
 using System.Windows.Input;
+using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
+using Track = GMMusic.Models.Track;
 
 namespace GMMusic.ViewModels
 {
@@ -182,6 +184,29 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда управления скрытием сетки фильтра
+
+        public ICommand FilterRevealCommand { get; set; }
+
+        public bool CanFilterRevealCommandExecute(object p) => true;
+
+        public void OnFilterRevealCommandExecuted(object p)
+        {
+            var grid = (p as UniformGrid);
+            switch(grid.Visibility)
+            {
+                case System.Windows.Visibility.Collapsed:
+                    grid.Visibility = System.Windows.Visibility.Visible;
+                    break;
+                case System.Windows.Visibility.Visible:
+                    grid.Visibility = System.Windows.Visibility.Collapsed;
+                    break;
+            }
+
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
@@ -192,6 +217,7 @@ namespace GMMusic.ViewModels
             TrackAddCommand = new LambdaCommand(OnTrackAddCommandExecuted, CanTrackAddCommandExecute);
             TagAddCommand = new LambdaCommand(OnTagAddCommandExecuted, CanTagAddCommandExecute);
             TagDeleteCommand = new LambdaCommand(OnTagDeleteCommandExecuted, CanTagDeleteCommandExecute);
+            FilterRevealCommand = new LambdaCommand(OnFilterRevealCommandExecuted, CanFilterRevealCommandExecute);
         }
 
     }
