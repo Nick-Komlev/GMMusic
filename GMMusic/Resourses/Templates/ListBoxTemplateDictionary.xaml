@@ -103,7 +103,10 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
               Background="{StaticResource YellowColor}">
             <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
-            <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagAddCommand}" CommandParameter="{Binding Name}">
+            <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagAddCommand}" 
+                    CommandParameter="{Binding Name}"
+                    Background="{StaticResource YellowColor}"
+                    BorderThickness="0">
                 <fa:ImageAwesome Icon="Solid_PlusSquare" Height="16"/>
             </Button>
         </StackPanel>
@@ -131,7 +134,10 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
               Background="{StaticResource YellowColor}">
             <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
-            <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagDeleteCommand}" CommandParameter="{Binding Name}">
+            <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagDeleteCommand}" 
+                    CommandParameter="{Binding Name}"
+                    Background="{StaticResource YellowColor}"
+                    BorderThickness="0">
                 <fa:ImageAwesome Icon="Solid_MinusSquare" Height="16"/>
             </Button>
         </StackPanel>
@@ -158,7 +164,13 @@
     <DataTemplate x:Key="ButtonlessTagDataTemplate" DataType="m:Tag">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
               Background="{StaticResource YellowColor}">
-            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
+            <TextBox x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14" 
+                     IsReadOnly="True" Focusable="False" Background="{StaticResource YellowColor}" BorderThickness="0"/>
+            <Button 
+                    Background="{StaticResource YellowColor}"
+                    BorderThickness="0">
+                <fa:ImageAwesome Icon="Regular_Edit" Height="16"/>
+            </Button>
         </StackPanel>
     </DataTemplate>
 
