@@ -28,7 +28,8 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderThickness="1"
                             BorderBrush="{StaticResource DarkPurpleColor}"
-                            Padding="7,2,7,7">
+                            Padding="7,2,7,7"
+                            Margin="0,5,0,0">
                         <ContentPresenter ContentSource="Header"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -42,6 +43,13 @@
                             <Setter Property="Margin" Value="0,5,0,0"/>
                             <Setter Property="Padding" Value="7,2,7,7"/>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{StaticResource DarkPurpleColor}"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -103,16 +111,12 @@
 
     <Style TargetType="Button">
         <Setter Property="Margin" Value="2"/>
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                                     AncestorLevel=1,
-                                                                                     AncestorType=Control}}"/>
+        <Setter Property="Background" Value="{StaticResource DarkBlueColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
     </Style>
 
     <Style TargetType="TextBox">
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                                     AncestorLevel=1,
-                                                                                     AncestorType=Control}}"/>
+        <Setter Property="Background" Value="{StaticResource DarkBlueColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
     </Style>
 

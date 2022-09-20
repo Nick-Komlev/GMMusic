@@ -101,7 +101,7 @@
 
     <DataTemplate x:Key="TagDataTemplate" DataType="m:Tag">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-              Background="{StaticResource OrangeColor}">
+              Background="{StaticResource YellowColor}">
             <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
             <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagAddCommand}" CommandParameter="{Binding Name}">
                 <fa:ImageAwesome Icon="Solid_PlusSquare" Height="16"/>
@@ -129,7 +129,7 @@
 
     <DataTemplate x:Key="SelectedTagDataTemplate" DataType="m:Tag">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-              Background="{StaticResource OrangeColor}">
+              Background="{StaticResource YellowColor}">
             <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
             <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagDeleteCommand}" CommandParameter="{Binding Name}">
                 <fa:ImageAwesome Icon="Solid_MinusSquare" Height="16"/>
@@ -157,7 +157,7 @@
 
     <DataTemplate x:Key="ButtonlessTagDataTemplate" DataType="m:Tag">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-              Background="{StaticResource OrangeColor}">
+              Background="{StaticResource YellowColor}">
             <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
         </StackPanel>
     </DataTemplate>
