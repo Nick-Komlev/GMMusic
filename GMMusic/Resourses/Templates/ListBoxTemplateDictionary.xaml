@@ -3,10 +3,12 @@
                     xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
                     xmlns:m="clr-namespace:GMMusic.Models"
                     xmlns:fa="http://schemas.fontawesome.com/icons/"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:vm="clr-namespace:GMMusic.ViewModels">
 
     <DataTemplate x:Key="TrackBrowserDataTemplate" DataType="m:Track">
-        <Grid HorizontalAlignment="Stretch" 
+        <Grid x:Name="gridElement"
+              HorizontalAlignment="Stretch" 
               Background="{StaticResource TransparentColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -60,13 +62,11 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <!--<Trigger Property="IsSelected" Value="True">
-                <Setter Property="BorderBrush" Value="{StaticResource OrangeColor}"/>
-                <Setter Property="Background" Value="{StaticResource YellowColor}"/>
-                <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
-            </Trigger>-->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource OrangeColor}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource YellowColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

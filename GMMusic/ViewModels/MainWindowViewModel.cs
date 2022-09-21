@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
 using Track = GMMusic.Models.Track;
+using System.Windows.Controls;
 
 namespace GMMusic.ViewModels
 {
@@ -53,6 +54,20 @@ namespace GMMusic.ViewModels
         {
             get => _SelectedBrowserTrack;
             set => Set(ref _SelectedBrowserTrack, value);
+        }
+
+        #endregion
+        
+        #region Свойство выбранного в плейлисте медиаплеера трэка
+
+        private Track _SelectedPlaylistTrack;
+
+        /// <summary>Выбранный в браузере трэк</summary>
+
+        public Track SelectedPlaylistTrack
+        {
+            get => _SelectedPlaylistTrack;
+            set => Set(ref _SelectedPlaylistTrack, value);
         }
 
         #endregion
@@ -207,6 +222,33 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда выбора текущего трэка
+
+        public ICommand TrackSelectionCommand { get; set; }
+
+        public bool CanTrackSelectionCommandExecute(object p) => true;
+
+        public void OnTrackSelectionCommandExecuted(object p)
+        {
+            SelectedTrackMediaPlayer.CurrentTrack = SelectedPlaylistTrack;
+        }
+
+        #endregion
+
+        #region Команда убирающая выбор текущего трэка
+
+        public ICommand TrackUnSelectionCommand { get; set; }
+
+        public bool CanTrackUnSelectionCommandExecute(object p) => true;
+
+        public void OnTrackUnSelectionCommandExecuted(object p)
+        {
+            //var list = p as ListBox;
+            //list.SelectedItem = list.SelectedItem;
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
@@ -218,6 +260,9 @@ namespace GMMusic.ViewModels
             TagAddCommand = new LambdaCommand(OnTagAddCommandExecuted, CanTagAddCommandExecute);
             TagDeleteCommand = new LambdaCommand(OnTagDeleteCommandExecuted, CanTagDeleteCommandExecute);
             FilterRevealCommand = new LambdaCommand(OnFilterRevealCommandExecuted, CanFilterRevealCommandExecute);
+            TrackSelectionCommand = new LambdaCommand(OnTrackSelectionCommandExecuted, CanTrackSelectionCommandExecute);
+            TrackUnSelectionCommand = new LambdaCommand(OnTrackUnSelectionCommandExecuted, CanTrackUnSelectionCommandExecute);
+
         }
 
     }
