@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using GMMusic.Models;
 
 namespace GMMusic.Views.UserControls
 {
+
     public partial class UserListBox : UserControl
     {
         public static readonly DependencyProperty ItemsSourceProperty =
@@ -68,9 +71,5 @@ namespace GMMusic.Views.UserControls
             InitializeComponent();
         }
 
-        private void ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            SelectedItem = ((sender as ListBox).SelectedItem as Track);
-        }
     }
 }

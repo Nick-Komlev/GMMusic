@@ -4,6 +4,7 @@
                     xmlns:m="clr-namespace:GMMusic.Models"
                     xmlns:fa="http://schemas.fontawesome.com/icons/"
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:b="clr-namespace:GMMusic.Behaviors"
                     xmlns:vm="clr-namespace:GMMusic.ViewModels">
 
     <DataTemplate x:Key="TrackBrowserDataTemplate" DataType="m:Track">
@@ -53,10 +54,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Padding="2"
-                            BorderThickness="2">
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Padding="2"
+                        BorderThickness="2">
                         <ContentPresenter/>
+                        <i:Interaction.Behaviors>
+                            <b:ListBoxElementDraging/>
+                        </i:Interaction.Behaviors>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

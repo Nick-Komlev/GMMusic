@@ -40,9 +40,12 @@
                              SelectedItem="{Binding SelectedTrackMediaPlayer}">
                     </ListBox>
 
-                    <uc:UserListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
+                    <ListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
+                             Style="{StaticResource MediaPlayerPlaylistStyle}"
+                             ItemContainerStyle="{StaticResource MediaPlayerPlaylistContainerStyle}"
                              SelectedItem="{Binding SelectedTrackMediaPlayer.CurrentTrack, Mode=TwoWay}" x:Name="playlistListBox">
-                    </uc:UserListBox>
+                        
+                    </ListBox>
 
                     <DockPanel Grid.Column="2" HorizontalAlignment="Stretch" LastChildFill="True">
                         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="True">

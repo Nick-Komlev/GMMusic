@@ -24,6 +24,7 @@ namespace GMMusic.Views.UserControls
             return true;
         }
 
+        #region Свойство зависимости Медиаплеера
 
         public static readonly DependencyProperty MediaPlayerProperty = 
             DependencyProperty.Register(
@@ -43,14 +44,6 @@ namespace GMMusic.Views.UserControls
             set { SetValue(MediaPlayerProperty, value); }
         }
 
-        private Track _TrackName;
-
-        public Track TrackName
-        {
-            get => _TrackName;
-            set => Set(ref _TrackName, value);
-        }
-
         private static object CoerceMediaPlayer(DependencyObject d, object baseValue)
         {
             return baseValue;
@@ -61,11 +54,11 @@ namespace GMMusic.Views.UserControls
             return;
         }
 
+        #endregion
+
         public TrackMediaControl()
         {
             InitializeComponent();
-
-            TrackName = MediaPlayer?.CurrentTrack;
         }
     }
 }

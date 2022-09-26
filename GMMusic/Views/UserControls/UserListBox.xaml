@@ -5,13 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:GMMusic.Views.UserControls"
+             xmlns:b="clr-namespace:GMMusic.Behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <ListBox HorizontalAlignment="Stretch"
+        <ListBox x:Name="PlaylistBox"
+                 HorizontalAlignment="Stretch"
                  VerticalAlignment="Stretch"
-                 ItemContainerStyle="{StaticResource MediaPlayerPlaylistContainerStyle}"
                  Style="{StaticResource TrackBrowserStyle}"
-                 ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:UserListBox}}" MouseDoubleClick="ListBox_MouseDoubleClick">
+                 ItemsSource="{Binding ItemsSource, 
+                                       RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:UserListBox}}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="ContentTemplate" Value="{StaticResource TrackBrowserDataTemplate}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="2"
+                            BorderThickness="2">
+                                    <ContentPresenter/>
+                                    <i:Interaction.Behaviors>
+                                        <b:ListBoxElementDraging/>
+                                    </i:Interaction.Behaviors>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource OrangeColor}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource YellowColor}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
     </DockPanel>
 </UserControl>
