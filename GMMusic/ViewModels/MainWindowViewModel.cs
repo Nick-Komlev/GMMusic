@@ -57,18 +57,17 @@ namespace GMMusic.ViewModels
         }
 
         #endregion
-       
 
         #region Свойство списка медиаплееров
 
-        private List<MyMediaPlayer> _MediaPlayers = new List<MyMediaPlayer>() { 
+        private ObservableCollection<MyMediaPlayer> _MediaPlayers = new ObservableCollection<MyMediaPlayer>() { 
             new MyMediaPlayer(0), 
             new MyMediaPlayer(1), 
             new MyMediaPlayer(2) };
 
         /// <summary>Список медиаплееров</summary>
 
-        public List<MyMediaPlayer> MediaPlayers
+        public ObservableCollection<MyMediaPlayer> MediaPlayers
         {
             get => _MediaPlayers;
             set => Set(ref _MediaPlayers, value);
@@ -209,6 +208,29 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда play
+
+        public ICommand PlayCommand { get; set; }
+
+        public bool CanPlayCommandExecute(object p) => true;
+
+        public void OnPlayCommandExecuted(object p)
+        {
+            var player = p as MyMediaPlayer;
+            if (player.CurrentTrack is null)
+            {
+                if (player.Tracks.Count > 0)
+                {
+                    player.CurrentTrack = player.Tracks.ElementAt(0);
+                }
+                else return;
+                player.Open(new Uri(player.CurrentTrack.SourcePath));
+            }
+            player.Play();
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
@@ -220,7 +242,6 @@ namespace GMMusic.ViewModels
             TagAddCommand = new LambdaCommand(OnTagAddCommandExecuted, CanTagAddCommandExecute);
             TagDeleteCommand = new LambdaCommand(OnTagDeleteCommandExecuted, CanTagDeleteCommandExecute);
             FilterRevealCommand = new LambdaCommand(OnFilterRevealCommandExecuted, CanFilterRevealCommandExecute);
-
         }
 
     }

@@ -29,7 +29,7 @@
                 <fa:ImageAwesome Icon="Solid_CircleNotch"></fa:ImageAwesome>
             </Button>
             <TextBlock VerticalAlignment="Center" Margin="5,0" 
-                       Text="{Binding MediaPlayer.Text, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}, Mode=TwoWay}"/>
+                       Text="{Binding MediaPlayer.CurrentTrack.Name, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}, Mode=TwoWay}"/>
         </StackPanel>
         <ProgressBar Grid.Row="1" Margin="5,10" Value="25" 
                      Foreground="{StaticResource YellowColor}" 

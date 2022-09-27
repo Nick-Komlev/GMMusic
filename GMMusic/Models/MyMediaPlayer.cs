@@ -1,43 +1,45 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
 namespace GMMusic.Models
 {
-    public class MyMediaPlayer : MediaPlayer
+    public class MyMediaPlayer : MediaPlayer, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; set; }
-        public string Text { get; set; }
         private Track _CurrentTrack;
         public Track CurrentTrack 
-        { 
-            get=>_CurrentTrack; 
-            set
-            {
-                _CurrentTrack = value;
-                Text = _CurrentTrack?.Name;
-            }
+        {
+            get => _CurrentTrack;
+            set => Set(ref _CurrentTrack, value);
         }
         public ICollection<Track> Tracks { get; set; } = new ObservableCollection<Track>();
 
         public MyMediaPlayer(int id) : base()
         {
             Id = id;
-            CurrentTrack = new Track
-            {
-                Id = 100,
-                Name = "Unnamed",
-                Duration = new System.TimeSpan(1, 1, 1),
-                Tags = new List<Tag>(),
-                Playlists = new List<Playlist>(),
-                SourcePath = "c:"
-            };
         }
 
         public override string ToString()
         {
             return "MP " + Id.ToString();
+        }        
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
         }
     }
 }

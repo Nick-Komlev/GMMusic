@@ -49,6 +49,10 @@ namespace GMMusic.Behaviors
                 CurrentSelection = _ListBox.SelectedItem;
                 DenySelection = true;
             }
+            else
+            {
+
+            }
         }
 
         protected override void OnDetaching()

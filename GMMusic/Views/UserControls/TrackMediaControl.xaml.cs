@@ -56,6 +56,14 @@ namespace GMMusic.Views.UserControls
 
         #endregion
 
+        private Track _CurrentTrack;
+
+        public Track CurrentTrack
+        {
+            get => _CurrentTrack;
+            set => Set(ref _CurrentTrack, value);
+        }
+
         public TrackMediaControl()
         {
             InitializeComponent();
