@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
+                    xmlns:m="clr-namespace:GMMusic.Models"
+                    xmlns:fa="http://schemas.fontawesome.com/icons/"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:b="clr-namespace:GMMusic.Behaviors"
+                    xmlns:vm="clr-namespace:GMMusic.ViewModels">
+
+    <Style x:Key="RepeatButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding MediaPlayer.IsRepeating, RelativeSource={RelativeSource AncestorType=uc:TrackMediaControl}}"
+                         Value="True">
+                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PlayButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{StaticResource DarkBlueColor}"
+                            CornerRadius="30"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource PurpleColor}">
+                        <fa:ImageAwesome Icon="Solid_Play" Foreground="{StaticResource PurpleColor}" Height="25" Margin="18,0,15,0"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding MediaPlayer.IsPlaying, RelativeSource={RelativeSource AncestorType=uc:TrackMediaControl}}"
+                         Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border Background="{StaticResource OrangeColor}"
+                                    CornerRadius="30"
+                                    BorderThickness="1">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{Binding Color, Source={StaticResource YellowColor}}" ShadowDepth="0" BlurRadius="25"></DropShadowEffect>
+                                </Border.Effect>
+                                <fa:ImageAwesome Icon="Solid_Pause" Foreground="{StaticResource WhiteColor}" Height="25" Margin="15,0,15,0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

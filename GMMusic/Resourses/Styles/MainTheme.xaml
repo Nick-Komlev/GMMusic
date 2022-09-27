@@ -109,7 +109,13 @@
         <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
     </Style>
 
-    <Style TargetType="Button">
+    <Style x:Key="ButtonBase" TargetType="Button">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="{StaticResource DarkBlueColor}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Background" Value="{StaticResource DarkBlueColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PurpleColor}"/>

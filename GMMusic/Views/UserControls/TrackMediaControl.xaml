@@ -5,19 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMMusic.Views.UserControls"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
+             xmlns:vm="clr-namespace:GMMusic.ViewModels"
              d:DesignHeight="100" d:DesignWidth="400">
     <Grid Background="{StaticResource TransparentColor}">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
-            <Button Margin="5">
-                <fa:ImageAwesome Icon="Solid_Play"></fa:ImageAwesome>
+            <Button Margin="5,2,5,2" Style="{StaticResource PlayButtonStyle}"
+                    Command="{Binding DataContext.PlayCommand, ElementName=mainWindow}" 
+                    CommandParameter="{Binding MediaPlayer, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}}">
             </Button>
             <Button Margin="5,12">
                 <fa:ImageAwesome Icon="Solid_Backward"></fa:ImageAwesome>
@@ -25,13 +27,15 @@
             <Button Margin="5,12">
                 <fa:ImageAwesome Icon="Solid_Forward"></fa:ImageAwesome>
             </Button>
-            <Button Margin="5,12">
+            <Button Margin="5,12" Style="{StaticResource RepeatButtonStyle}"
+                    Command="{Binding DataContext.RepeatCommand, ElementName=mainWindow}" 
+                    CommandParameter="{Binding MediaPlayer, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}}">
                 <fa:ImageAwesome Icon="Solid_CircleNotch"></fa:ImageAwesome>
             </Button>
             <TextBlock VerticalAlignment="Center" Margin="5,0" 
                        Text="{Binding MediaPlayer.CurrentTrack.Name, RelativeSource={RelativeSource AncestorType=local:TrackMediaControl}, Mode=TwoWay}"/>
         </StackPanel>
-        <ProgressBar Grid.Row="1" Margin="5,10" Value="25" 
+        <ProgressBar Grid.Row="1" Margin="5" Value="25" 
                      Foreground="{StaticResource YellowColor}" 
                      Background="{StaticResource DarkBlueColor}"/>
         <ProgressBar Grid.Column="1" Margin="5" Value="25" Grid.RowSpan="2" Orientation="Vertical"

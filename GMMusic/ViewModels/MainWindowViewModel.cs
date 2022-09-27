@@ -217,16 +217,42 @@ namespace GMMusic.ViewModels
         public void OnPlayCommandExecuted(object p)
         {
             var player = p as MyMediaPlayer;
-            if (player.CurrentTrack is null)
+            if (!player.IsPlaying)
             {
-                if (player.Tracks.Count > 0)
+                if (!player.HasAudio)
                 {
-                    player.CurrentTrack = player.Tracks.ElementAt(0);
+                    if (player.CurrentTrack is null)
+                    {
+                        if (player.Tracks.Count > 0)
+                        {
+                            player.CurrentTrack = player.Tracks.ElementAt(0);
+                        }
+                        else return;
+                    }
+                    player.Open();
                 }
-                else return;
-                player.Open(new Uri(player.CurrentTrack.SourcePath));
+                player.Play();
+                player.IsPlaying = true;
             }
-            player.Play();
+            else
+            {
+                player.Pause();
+                player.IsPlaying = false;
+            }
+        }
+
+        #endregion
+
+        #region Команда repeat
+
+        public ICommand RepeatCommand { get; set; }
+
+        public bool CanRepeatCommandExecute(object p) => true;
+
+        public void OnRepeatCommandExecuted(object p)
+        {
+            var player = p as MyMediaPlayer;
+            player.IsRepeating = !player.IsRepeating;
         }
 
         #endregion
@@ -242,6 +268,9 @@ namespace GMMusic.ViewModels
             TagAddCommand = new LambdaCommand(OnTagAddCommandExecuted, CanTagAddCommandExecute);
             TagDeleteCommand = new LambdaCommand(OnTagDeleteCommandExecuted, CanTagDeleteCommandExecute);
             FilterRevealCommand = new LambdaCommand(OnFilterRevealCommandExecuted, CanFilterRevealCommandExecute);
+            PlayCommand = new LambdaCommand(OnPlayCommandExecuted, CanPlayCommandExecute);
+            RepeatCommand = new LambdaCommand(OnRepeatCommandExecuted, CanRepeatCommandExecute);
+
         }
 
     }
