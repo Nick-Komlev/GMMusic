@@ -22,9 +22,9 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                 <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Padding="2"
-                            BorderThickness="2">
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        Padding="3"
+                                        BorderThickness="2">
                                     <ContentPresenter/>
                                     <i:Interaction.Behaviors>
                                         <b:ListBoxElementDoubleClickSelection/>
@@ -35,10 +35,11 @@
                     </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="{StaticResource OrangeColor}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource YellowColor}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{StaticResource YellowColor}"/>
+                            <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+                            <Setter Property="Foreground" Value="{StaticResource BlackColor}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>

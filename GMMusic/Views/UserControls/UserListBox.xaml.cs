@@ -63,7 +63,7 @@ namespace GMMusic.Views.UserControls
                 new FrameworkPropertyMetadata(
                         null,
                         FrameworkPropertyMetadataOptions.AffectsMeasure |
-                        FrameworkPropertyMetadataOptions.AffectsRender,
+                        FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                         new PropertyChangedCallback(OnTrulySelectedItemChanged),
                         new CoerceValueCallback(CoerceTrulySelectedItem)));
 
@@ -73,7 +73,6 @@ namespace GMMusic.Views.UserControls
             set 
             { 
                 SetValue(TrulySelectedItemProperty, value);
-                SelectedItem = value;
             }
         }
 
