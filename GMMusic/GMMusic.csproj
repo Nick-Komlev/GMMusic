@@ -105,6 +105,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\ListBoxElementDoubleClickSelection.cs" />
     <Compile Include="Behaviors\ListBoxElementDraging.cs" />
     <Compile Include="Infrastructure\Commands\BaseCommand.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />

@@ -22,8 +22,15 @@ namespace GMMusic.Models
                 Set(ref _CurrentTrack, value);
                 if (!(value is null))
                 {
-                    Open(new Uri(_CurrentTrack.SourcePath));
-                    if (IsPlaying) Play();
+                    try
+                    {
+                        Open(new Uri(_CurrentTrack.SourcePath));
+                        if (IsPlaying) Play();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат или путь файла");
+                    }
                 }
             }
         }

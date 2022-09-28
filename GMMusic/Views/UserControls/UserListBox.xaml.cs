@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,8 +10,23 @@ using GMMusic.Models;
 namespace GMMusic.Views.UserControls
 {
 
-    public partial class UserListBox : UserControl
+    public partial class UserListBox : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(
                 "ItemsSource",
@@ -38,32 +55,43 @@ namespace GMMusic.Views.UserControls
             return;
         }
 
-        public static readonly DependencyProperty SelectedItemProperty =
+        public static readonly DependencyProperty TrulySelectedItemProperty =
             DependencyProperty.Register(
-                "SelectedItem",
+                "TrulySelectedItem",
                 typeof(Track),
                 typeof(UserListBox),
                 new FrameworkPropertyMetadata(
                         null,
                         FrameworkPropertyMetadataOptions.AffectsMeasure |
                         FrameworkPropertyMetadataOptions.AffectsRender,
-                        new PropertyChangedCallback(OnSelectedItemChanged),
-                        new CoerceValueCallback(CoerceSelectedItem)));
+                        new PropertyChangedCallback(OnTrulySelectedItemChanged),
+                        new CoerceValueCallback(CoerceTrulySelectedItem)));
 
-        public Track SelectedItem
+        public Track TrulySelectedItem
         {
-            get { return (Track)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get { return (Track)GetValue(TrulySelectedItemProperty); }
+            set 
+            { 
+                SetValue(TrulySelectedItemProperty, value);
+                SelectedItem = value;
+            }
         }
 
-        private static object CoerceSelectedItem(DependencyObject d, object baseValue)
+        private static object CoerceTrulySelectedItem(DependencyObject d, object baseValue)
         {
             return baseValue;
         }
 
-        private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnTrulySelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             return;
+        }
+
+        private Track _SelectedItem;
+        public Track SelectedItem
+        {
+            get => _SelectedItem;
+            set => Set(ref _SelectedItem, value);
         }
 
         public UserListBox()

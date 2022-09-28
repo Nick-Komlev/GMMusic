@@ -40,12 +40,10 @@
                              SelectedItem="{Binding SelectedTrackMediaPlayer}">
                     </ListBox>
 
-                    <ListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
-                             Style="{StaticResource MediaPlayerPlaylistStyle}"
-                             ItemContainerStyle="{StaticResource MediaPlayerPlaylistContainerStyle}"
-                             SelectedItem="{Binding SelectedTrackMediaPlayer.CurrentTrack, Mode=TwoWay}" x:Name="playlistListBox">
+                    <uc:UserListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
+                             TrulySelectedItem="{Binding SelectedTrackMediaPlayer.CurrentTrack, Mode=TwoWay}" x:Name="playlistListBox">
                         
-                    </ListBox>
+                    </uc:UserListBox>
 
                     <DockPanel Grid.Column="2" HorizontalAlignment="Stretch" LastChildFill="True">
                         <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="True">
@@ -80,11 +78,6 @@
                          ItemsSource="{Binding Tracks}"
                          SelectedItem="{Binding SelectedBrowserTrack}"
                          ItemContainerStyle="{StaticResource TrackBrowserContainerStyle}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDoubleClick">
-                                    <i:InvokeCommandAction Command="{Binding TrackAddCommand}"></i:InvokeCommandAction>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
                         </ListBox>
                     </DockPanel>
                 </Grid>

@@ -141,9 +141,10 @@ namespace GMMusic.ViewModels
 
         public void OnTrackAddCommandExecuted(object p)
         {
-            if (!SelectedTrackMediaPlayer.Tracks.Contains(SelectedBrowserTrack))
+            var t = (p as ListBoxItem).DataContext as Track;
+            if (!SelectedTrackMediaPlayer.Tracks.Contains(t))
             {
-                SelectedTrackMediaPlayer.Tracks.Add(SelectedBrowserTrack);
+                SelectedTrackMediaPlayer.Tracks.Add(t);
             }
 
         }

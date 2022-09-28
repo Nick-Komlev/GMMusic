@@ -27,7 +27,7 @@
                             BorderThickness="2">
                                     <ContentPresenter/>
                                     <i:Interaction.Behaviors>
-                                        <b:ListBoxElementDraging/>
+                                        <b:ListBoxElementDoubleClickSelection/>
                                     </i:Interaction.Behaviors>
                                 </Border>
                             </ControlTemplate>

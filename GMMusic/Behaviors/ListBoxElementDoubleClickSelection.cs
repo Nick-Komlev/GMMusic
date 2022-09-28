@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Windows.Controls;
 using Microsoft.Xaml.Behaviors;
 using System.Windows.Media;
 using System.Windows;
+using GMMusic.Models;
+using GMMusic.Views.UserControls;
 
 namespace GMMusic.Behaviors
 {
-    public class ListBoxElementDraging : Behavior<Border>
+    public class ListBoxElementDoubleClickSelection : Behavior<Border>
     {
         private ListBoxItem _Element;
         private ListBox _ListBox;
+        private UserListBox _UserListBox;
         private object CurrentSelection;
         bool DenySelection = false;
 
@@ -27,6 +26,7 @@ namespace GMMusic.Behaviors
             }
             while (!(par is ListBox));
             _ListBox = par as ListBox;
+            _UserListBox = (_ListBox.Parent as DockPanel).Parent as UserListBox;
 
             AssociatedObject.PreviewMouseLeftButtonDown += PreviewMouseLeftButtonDown;
             _ListBox.SelectionChanged += SelectionChanged;
@@ -50,13 +50,13 @@ namespace GMMusic.Behaviors
             }
             else
             {
-
+                _UserListBox.TrulySelectedItem = _Element.DataContext as Track;
             }
         }
 
         protected override void OnDetaching()
         {
-            
+
         }
     }
 }
