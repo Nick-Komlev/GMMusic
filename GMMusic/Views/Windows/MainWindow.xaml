@@ -20,10 +20,14 @@
     </Window.DataContext>
     <DockPanel LastChildFill="True" Background="{StaticResource BlackColor}">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Файл" TextBlock.FontSize="14"></MenuItem>
+            <MenuItem Header="Файл" TextBlock.FontSize="14">
+                <MenuItem Header="Сохранить все"  Command="{Binding SaveCommand}"/>
+            </MenuItem>
             <MenuItem Header="Справка" TextBlock.FontSize="14"></MenuItem>
         </Menu>
-        <StackPanel DockPanel.Dock="Bottom" Height="24"></StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Height="24">
+            <TextBlock x:Name="StatusTextBlock" Text="{Binding State}" Margin="8,4" FontSize="14" Foreground="{StaticResource LightGrayColor}"/>
+        </StackPanel>
         <TabControl>
             <TabItem Header="Медиаплеер">
                 <Grid>
@@ -104,7 +108,7 @@
                                 <Button>
                                     <fa:ImageAwesome Icon="Regular_TrashAlt" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
-                                <Button>
+                                <Button Command="{Binding SaveCommand}">
                                     <fa:ImageAwesome Icon="Regular_Save" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
                             </StackPanel>
@@ -139,7 +143,7 @@
                                 <Button>
                                     <fa:ImageAwesome Icon="Regular_TrashAlt" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
-                                <Button>
+                                <Button  Command="{Binding SaveCommand}">
                                     <fa:ImageAwesome Icon="Regular_Save" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
                             </StackPanel>

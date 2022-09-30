@@ -4,6 +4,7 @@
     
     <SolidColorBrush x:Key="BlackColor" Color="#FF1E1E1E"/>
     <SolidColorBrush x:Key="GrayColor" Color="#FF323232"/>
+    <SolidColorBrush x:Key="LightGrayColor" Color="#FFAAAAAA"/>
     <SolidColorBrush x:Key="YellowColor" Color="#FFFFC92D"/>
     <SolidColorBrush x:Key="OrangeColor" Color="#FFFB9F42"/>
     <SolidColorBrush x:Key="LightPurpleColor" Color="#FF7C2CFD"/>
@@ -134,12 +135,23 @@
         <Setter Property="Background" Value="{StaticResource GrayColor}"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="Margin" Value="8,4,0,0"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <Style TargetType="DataGridCell">
         <Setter Property="Background" Value="{StaticResource GrayColor}"/>
         <Setter Property="Foreground" Value="{StaticResource WhiteColor}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DarkPurpleColor}"/>
+        <Setter Property="Padding" Value="2,2"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style TargetType="DataGridRow">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="26"/>
+
+
     </Style>
 
 </ResourceDictionary>

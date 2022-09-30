@@ -30,6 +30,20 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Свойство текста статуса
+
+        private string _State = "Готов!";
+
+        /// <summary>Заголовок окна</summary>
+
+        public string State
+        {
+            get => _State;
+            set => Set(ref _State, value);
+        }
+
+        #endregion
+
         #region Свойство выбранной дорожки
 
         private MyMediaPlayer _SelectedTrackMediaPlayer;
@@ -258,6 +272,21 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда save
+
+        public ICommand SaveCommand { get; set; }
+
+        public bool CanSaveCommandExecute(object p) => true;
+
+        public void OnSaveCommandExecuted(object p)
+        {
+            State = "Изменения сохраняются...";
+            DBController.SaveChanges();
+            State = "Изменения сохранены!";
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
@@ -271,6 +300,7 @@ namespace GMMusic.ViewModels
             FilterRevealCommand = new LambdaCommand(OnFilterRevealCommandExecuted, CanFilterRevealCommandExecute);
             PlayCommand = new LambdaCommand(OnPlayCommandExecuted, CanPlayCommandExecute);
             RepeatCommand = new LambdaCommand(OnRepeatCommandExecuted, CanRepeatCommandExecute);
+            SaveCommand = new LambdaCommand(OnSaveCommandExecuted, CanSaveCommandExecute);
 
         }
 
