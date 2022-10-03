@@ -1,0 +1,177 @@
+﻿<Window x:Class="GMMusic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:l="clr-namespace:GMMusic"
+        xmlns:vm="clr-namespace:GMMusic.ViewModels"
+        xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
+        xmlns:m="clr-namespace:GMMusic.Models"
+        xmlns:db="clr-namespace:GMMusic.Infrastructure"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        Title="{Binding Title}" Height="800" Width="1200"
+        Style="{StaticResource MyWindow}" Name="mainWindow">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <DockPanel LastChildFill="True" Background="{StaticResource BlackColor}">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл" TextBlock.FontSize="14">
+                <MenuItem Header="Сохранить все"  Command="{Binding SaveCommand}"/>
+            </MenuItem>
+            <MenuItem Header="Справка" TextBlock.FontSize="14"></MenuItem>
+        </Menu>
+        <StackPanel DockPanel.Dock="Bottom" Height="24">
+            <TextBlock x:Name="StatusTextBlock" Text="{Binding State}" Margin="8,4" FontSize="14" Foreground="{StaticResource LightGrayColor}"/>
+        </StackPanel>
+        <TabControl>
+            <TabItem Header="Медиаплеер">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter Grid.Column="0"/>
+                    <GridSplitter Grid.Column="1"/>
+                    <ListBox ItemsSource="{Binding MediaPlayers}"
+                             Style="{StaticResource TrackBrowserStyle}"
+                             ItemContainerStyle="{StaticResource TrackMediaPlayerListContainerStyle}"
+                             Background="{StaticResource BlackColor}"
+                             SelectedItem="{Binding SelectedTrackMediaPlayer}">
+                    </ListBox>
+
+                    <uc:UserListBox Grid.Column="1" ItemsSource="{Binding SelectedTrackMediaPlayer.Tracks}"
+                             TrulySelectedItem="{Binding SelectedTrackMediaPlayer.CurrentTrack, Mode=TwoWay}" x:Name="playlistListBox">
+                        
+                    </uc:UserListBox>
+
+                    <DockPanel Grid.Column="2" HorizontalAlignment="Stretch" LastChildFill="True" >
+                        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" LastChildFill="True" >
+                            <DockPanel DockPanel.Dock="Top">
+                                <fa:ImageAwesome Icon="Solid_Search" DockPanel.Dock="Left"
+                                             Foreground="{StaticResource WhiteColor}" Margin="8,0" Height="14"/>
+                                <Button DockPanel.Dock="Right" 
+                                    Command="{Binding FilterRevealCommand}" 
+                                    CommandParameter="{Binding ElementName=FilterUGrid}">
+                                    <fa:ImageAwesome Icon="Solid_Filter" Foreground="{StaticResource LightPurpleColor}" Height="20"/>
+                                </Button>
+                                <TextBox HorizontalAlignment="Stretch"
+                                         VerticalContentAlignment="Center"
+                                         Foreground="{StaticResource WhiteColor}"></TextBox>
+                            </DockPanel>
+                            <UniformGrid Name="FilterUGrid" Rows="2" DockPanel.Dock="Bottom" Visibility="Collapsed">
+                                <ListBox ItemsSource="{Binding SelectedTags}"
+                                         Style="{StaticResource TagListStyle}"
+                                         ItemContainerStyle="{StaticResource SelectedTagListContainerStyle}"
+                                         Background="{StaticResource BlackColor}">
+
+                                </ListBox>
+                                <ListBox x:Name="TagBrowser"
+                                         ItemsSource="{Binding Tags}"
+                                         Style="{StaticResource TagListStyle}"
+                                         Background="{StaticResource BlackColor}"
+                                         ItemContainerStyle="{StaticResource TagListContainerStyle}"
+                                         BorderThickness="1">
+
+                                </ListBox>
+                            </UniformGrid>
+                        </DockPanel>
+
+                        <ListBox x:Name="TrackBrowserListBox" Style="{StaticResource TrackBrowserStyle}"
+                         ItemsSource="{Binding Tracks}"
+                         SelectedItem="{Binding SelectedBrowserTrack}"
+                         ItemContainerStyle="{StaticResource TrackBrowserContainerStyle}"
+                                 Background="{StaticResource BlackColor}">
+                        </ListBox>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Треки">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter/>
+                    <DockPanel>
+                        <UniformGrid Columns="2" Height="30" Margin="2" DockPanel.Dock="Top">
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_PlusSquare" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_TrashAlt" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                                <Button Command="{Binding SaveCommand}">
+                                    <fa:ImageAwesome Icon="Regular_Save" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                            </StackPanel>
+                            <DockPanel>
+                                <fa:ImageAwesome Icon="Solid_Search" DockPanel.Dock="Left"
+                                                 Foreground="{StaticResource WhiteColor}" Margin="8,0" Height="14"/>
+                                <Button DockPanel.Dock="Right">
+                                    <fa:ImageAwesome Icon="Solid_Filter" Foreground="{StaticResource LightPurpleColor}" Height="20"/>
+                                </Button>
+                                <TextBox HorizontalAlignment="Stretch"
+                                         VerticalContentAlignment="Center"
+                                         Foreground="{StaticResource WhiteColor}"></TextBox>
+                            </DockPanel>
+                        </UniformGrid>
+                        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                              ItemsSource="{Binding Tracks}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Path" Binding="{Binding SourcePath}"/>
+                                <DataGridTextColumn Header="Tags" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1">
+                        <UniformGrid Columns="2" Height="30" Margin="2" DockPanel.Dock="Top">
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_PlusSquare" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                                <Button>
+                                    <fa:ImageAwesome Icon="Regular_TrashAlt" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                                <Button  Command="{Binding SaveCommand}">
+                                    <fa:ImageAwesome Icon="Regular_Save" Height="20" Foreground="{StaticResource WhiteColor}"/>
+                                </Button>
+                            </StackPanel>
+                            <DockPanel>
+                                <fa:ImageAwesome Icon="Solid_Search" DockPanel.Dock="Left"
+                                                 Foreground="{StaticResource WhiteColor}" Margin="8,0" Height="14"/>
+
+                                <TextBox HorizontalAlignment="Stretch"
+                                         VerticalContentAlignment="Center"
+                                         Foreground="{StaticResource WhiteColor}"></TextBox>
+                            </DockPanel>
+                        </UniformGrid>
+                        <ListBox 
+                             ItemsSource="{Binding Tags}"
+                             Style="{StaticResource TagListStyle}"
+                             ItemContainerStyle="{StaticResource ButtonlessTagListContainerStyle}"
+                             Height="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                     AncestorType=Grid, 
+                                                                                     AncestorLevel=1}}">
+
+                        </ListBox>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Плейлисты"></TabItem>
+            <TabItem Header="Тэги"></TabItem>
+        </TabControl>
+    </DockPanel>
+
+
+</Window>
