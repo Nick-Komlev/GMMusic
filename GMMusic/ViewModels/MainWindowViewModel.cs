@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
 using Track = GMMusic.Models.Track;
 using System.Windows.Controls;
+using Microsoft.Win32;
 
 namespace GMMusic.ViewModels
 {
@@ -272,6 +273,28 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда chooseFileTrack
+
+        public ICommand ChooseFileTrackCommand { get; set; }
+
+        public bool CanChooseFileTrackCommandExecute(object p) => true;
+
+        public void OnChooseFileTrackCommandExecuted(object p)
+        {
+            Track track = p as Track;
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = false;
+            if (dialog.ShowDialog() == true)
+            {
+                track.Name = dialog.SafeFileName.Split('.')[0];
+                track.SourcePath = dialog.FileName;
+                var file = TagLib.File.Create(dialog.FileName);
+                track.Duration = new TimeSpan(file.Properties.Duration.Hours, file.Properties.Duration.Minutes, file.Properties.Duration.Seconds);
+            }
+        }
+
+        #endregion
+
         #region Команда save
 
         public ICommand SaveCommand { get; set; }
@@ -301,7 +324,7 @@ namespace GMMusic.ViewModels
             PlayCommand = new LambdaCommand(OnPlayCommandExecuted, CanPlayCommandExecute);
             RepeatCommand = new LambdaCommand(OnRepeatCommandExecuted, CanRepeatCommandExecute);
             SaveCommand = new LambdaCommand(OnSaveCommandExecuted, CanSaveCommandExecute);
-
+            ChooseFileTrackCommand = new LambdaCommand(OnChooseFileTrackCommandExecuted, CanChooseFileTrackCommandExecute);
         }
 
     }

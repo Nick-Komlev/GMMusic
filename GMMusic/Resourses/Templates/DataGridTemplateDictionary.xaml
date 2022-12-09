@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
+                    xmlns:m="clr-namespace:GMMusic.Models"
+                    xmlns:fa="http://schemas.fontawesome.com/icons/"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:b="clr-namespace:GMMusic.Behaviors"
+                    xmlns:vm="clr-namespace:GMMusic.ViewModels">
+
+</ResourceDictionary>

@@ -149,7 +149,7 @@
 
     <Style TargetType="DataGridRow">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Height" Value="26"/>
+        <Setter Property="Height" Value="29"/>
 
 
     </Style>
