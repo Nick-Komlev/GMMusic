@@ -10,26 +10,59 @@ namespace GMMusic.Infrastructure
 {
     public static class DBController
     {
-        public static MyDBContext DBContext { get; set; }
+        private static MyDBContext DBContext { get; set; }
         public static ICollection<Track> Tracks { get; set; }
         public static ICollection<Tag> Tags { get; set; }
         public static ICollection<Playlist> Playlists { get; set; }
 
         static DBController()
         {
-            DBContext = new MyDBContext();
+            
         }
 
         public static void UploadData()
         {
-            Tracks = DBContext.Tracks?.ToList();
-            Tags = DBContext.Tags?.ToList();
-            Playlists = DBContext.Playlists?.ToList();
+            using (DBContext = new MyDBContext())
+            {
+                Tracks = DBContext.Tracks?.ToList();
+                Tags = DBContext.Tags?.ToList();
+                Playlists = DBContext.Playlists?.ToList();
+            }
         }
 
         public static void SaveChanges()
         {
-            DBContext.SaveChanges();
+
+        }
+
+        public static void SaveTrackChanges()
+        {
+            using (DBContext = new MyDBContext())
+            {
+                foreach (Track track in Tracks)
+                {
+                    if (track.Id == -1)
+                    {
+                        DBContext.Tracks.Add(track);
+                    }
+                    else
+                    {
+                        var t = (DBContext.Tracks.Find(track.Id));
+                        t.Copy(track);
+                    }
+                }
+                DBContext.SaveChanges();
+            }
+        }
+
+        public static void SaveTagChanges()
+        {
+
+        }
+
+        public static void SavePlaylistChanges()
+        {
+
         }
     }
 }

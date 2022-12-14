@@ -10,6 +10,16 @@ namespace GMMusic.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Track() { }
+
+        public Track(string name, TimeSpan duration, string path)
+        {
+            Id = -1;
+            Name = name;
+            Duration = duration;
+            SourcePath = path;
+        }
+
         private int _Id;
         public int Id
         {
@@ -38,13 +48,6 @@ namespace GMMusic.Models
             set => Set(ref _SourcePath, value);
         }
 
-        private bool _IsAmbience;
-        public bool  IsAmbience
-        {
-            get => _IsAmbience;
-            set => Set(ref _IsAmbience, value);
-        }
-
         public virtual ObservableCollection<Tag> Tags { get; set; } = new ObservableCollection<Tag>();
         public virtual ObservableCollection<Playlist> Playlists { get; set; } = new ObservableCollection<Playlist>();
 
@@ -64,6 +67,13 @@ namespace GMMusic.Models
             field = value;
             OnPropertyChanged(PropertyName);
             return true;
+        }
+
+        public void Copy(Track track)
+        {
+            Name = track.Name;
+            Duration = track.Duration;
+            SourcePath = track.SourcePath;
         }
     }
 }

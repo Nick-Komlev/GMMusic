@@ -73,6 +73,7 @@ namespace GMMusic.Views.UserControls
             set 
             { 
                 SetValue(TrulySelectedItemProperty, value);
+                SelectedItem = value;
             }
         }
 

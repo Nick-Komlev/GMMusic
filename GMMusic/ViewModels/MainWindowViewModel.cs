@@ -295,16 +295,41 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда chooseFileTrack
+
+        public ICommand AddTrackCommand { get; set; }
+
+        public bool CanAddTrackCommandExecute(object p) => true;
+
+        public void OnAddTrackCommandExecuted(object p)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            if (dialog.ShowDialog() == true)
+            {
+                for (int i = 0; i < dialog.FileNames.Length; i++)
+                {
+                    var file = TagLib.File.Create(dialog.FileNames[i]);
+                    Tracks.Add(new Track(dialog.SafeFileNames[i].Split('.')[0],
+                                         new TimeSpan(file.Properties.Duration.Hours, file.Properties.Duration.Minutes, file.Properties.Duration.Seconds),
+                                         dialog.FileNames[i]));
+                }
+            }
+        }
+
+        #endregion
+
         #region Команда save
 
-        public ICommand SaveCommand { get; set; }
+        public ICommand SaveTrackCommand { get; set; }
 
-        public bool CanSaveCommandExecute(object p) => true;
+        public bool CanSaveTrackCommandExecute(object p) => true;
 
-        public void OnSaveCommandExecuted(object p)
+        public void OnSaveTrackCommandExecuted(object p)
         {
             State = "Изменения сохраняются...";
-            DBController.SaveChanges();
+            DBController.Tracks = Tracks;
+            DBController.SaveTrackChanges();
             State = "Изменения сохранены!";
         }
 
@@ -323,8 +348,9 @@ namespace GMMusic.ViewModels
             FilterRevealCommand = new LambdaCommand(OnFilterRevealCommandExecuted, CanFilterRevealCommandExecute);
             PlayCommand = new LambdaCommand(OnPlayCommandExecuted, CanPlayCommandExecute);
             RepeatCommand = new LambdaCommand(OnRepeatCommandExecuted, CanRepeatCommandExecute);
-            SaveCommand = new LambdaCommand(OnSaveCommandExecuted, CanSaveCommandExecute);
+            SaveTrackCommand = new LambdaCommand(OnSaveTrackCommandExecuted, CanSaveTrackCommandExecute);
             ChooseFileTrackCommand = new LambdaCommand(OnChooseFileTrackCommandExecuted, CanChooseFileTrackCommandExecute);
+            AddTrackCommand = new LambdaCommand(OnAddTrackCommandExecuted, CanAddTrackCommandExecute);
         }
 
     }
