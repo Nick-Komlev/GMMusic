@@ -17,6 +17,8 @@ namespace GMMusic.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        public List<Track> DeletedTracks; 
+
         #region Свойство заголовока окна
 
         private string _Title = "Медиаплеер GMMusic";
@@ -148,6 +150,20 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Свойство активации кнопок удаления трэков
+
+        private bool _CanDeleteTrack;
+
+        /// <summary>Флаг возможности удаления трэков</summary>
+
+        public bool CanDeleteTrack
+        {
+            get => _CanDeleteTrack;
+            set => Set(ref _CanDeleteTrack, value);
+        }
+
+        #endregion
+
         #region Команда добавления выбранного трэка в плейлист медиаплеера
 
         public ICommand TrackAddCommand { get; set; }
@@ -224,6 +240,37 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда управления активации кнопок удаления треков
+
+        public ICommand AllowTrackDeleteCommand { get; set; }
+
+        public bool CanAllowTrackDeleteCommandExecute(object p) => true;
+
+        public void OnAllowTrackDeleteCommandExecuted(object p)
+        {
+            CanDeleteTrack = !CanDeleteTrack;
+        }
+
+        #endregion
+
+        #region Команда удаления трека
+
+        public ICommand DeleteTrackCommand { get; set; }
+
+        public bool CanDeleteTrackCommandExecute(object p) => true;
+
+        public void OnDeleteTrackCommandExecuted(object p)
+        {
+            Track t = p as Track;
+            Tracks.Remove(t);
+            if (t.Id > -1)
+            {
+                DeletedTracks.Add(t);
+            }
+        }
+
+        #endregion
+
         #region Команда play
 
         public ICommand PlayCommand { get; set; }
@@ -273,7 +320,7 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Команда chooseFileTrack
+        #region Команда выбора файла для трэка
 
         public ICommand ChooseFileTrackCommand { get; set; }
 
@@ -295,7 +342,7 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Команда chooseFileTrack
+        #region Команда добавления нового трэка
 
         public ICommand AddTrackCommand { get; set; }
 
@@ -319,7 +366,7 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Команда save
+        #region Команда сохранения изменений треков
 
         public ICommand SaveTrackCommand { get; set; }
 
@@ -329,7 +376,7 @@ namespace GMMusic.ViewModels
         {
             State = "Изменения сохраняются...";
             DBController.Tracks = Tracks;
-            DBController.SaveTrackChanges();
+            DBController.SaveTrackChanges(DeletedTracks);
             State = "Изменения сохранены!";
         }
 
@@ -340,6 +387,7 @@ namespace GMMusic.ViewModels
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
             Tags = new ObservableCollection<Tag>(DBController.Tags);
             Playlists = new ObservableCollection<Playlist>(DBController.Playlists);
+            DeletedTracks = new List<Track>();
 
             SelectedTrackMediaPlayer = MediaPlayers[0];
             TrackAddCommand = new LambdaCommand(OnTrackAddCommandExecuted, CanTrackAddCommandExecute);
@@ -351,6 +399,8 @@ namespace GMMusic.ViewModels
             SaveTrackCommand = new LambdaCommand(OnSaveTrackCommandExecuted, CanSaveTrackCommandExecute);
             ChooseFileTrackCommand = new LambdaCommand(OnChooseFileTrackCommandExecuted, CanChooseFileTrackCommandExecute);
             AddTrackCommand = new LambdaCommand(OnAddTrackCommandExecuted, CanAddTrackCommandExecute);
+            AllowTrackDeleteCommand = new LambdaCommand(OnAllowTrackDeleteCommandExecuted, CanAllowTrackDeleteCommandExecute);
+            DeleteTrackCommand = new LambdaCommand(OnDeleteTrackCommandExecuted, CanDeleteTrackCommandExecute);
         }
 
     }

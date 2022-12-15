@@ -119,6 +119,15 @@
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
     <Compile Include="Infrastructure\DBController.cs" />
     <Compile Include="Infrastructure\MyDBContext.cs" />
+    <Compile Include="Migrations\202212140831346_InitialCreate.cs" />
+    <Compile Include="Migrations\202212140831346_InitialCreate.designer.cs">
+      <DependentUpon>202212140831346_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212150739008_ColorAdding.cs" />
+    <Compile Include="Migrations\202212150739008_ColorAdding.designer.cs">
+      <DependentUpon>202212150739008_ColorAdding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MyMediaPlayer.cs" />
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -151,6 +160,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202212140831346_InitialCreate.resx">
+      <DependentUpon>202212140831346_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212150739008_ColorAdding.resx">
+      <DependentUpon>202212150739008_ColorAdding.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

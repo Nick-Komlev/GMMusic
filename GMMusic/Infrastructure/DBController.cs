@@ -35,7 +35,7 @@ namespace GMMusic.Infrastructure
 
         }
 
-        public static void SaveTrackChanges()
+        public static void SaveTrackChanges(List<Track> delTracks)
         {
             using (DBContext = new MyDBContext())
             {
@@ -50,6 +50,14 @@ namespace GMMusic.Infrastructure
                         var t = (DBContext.Tracks.Find(track.Id));
                         t.Copy(track);
                     }
+                }
+                if (delTracks.Count > 0)
+                {
+                    foreach (Track track in delTracks)
+                    {
+                        DBContext.Tracks.Remove(DBContext.Tracks.Find(track.Id));
+                    }
+                        
                 }
                 DBContext.SaveChanges();
             }

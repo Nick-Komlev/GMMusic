@@ -6,6 +6,9 @@
     <SolidColorBrush x:Key="GrayColor" Color="#FF323232"/>
     <SolidColorBrush x:Key="LightGrayColor" Color="#FFAAAAAA"/>
     <SolidColorBrush x:Key="YellowColor" Color="#FFFFC92D"/>
+    <SolidColorBrush x:Key="RedColor" Color="#FFA02C1F"/>
+    <SolidColorBrush x:Key="GreenColor" Color="#FF167941"/>
+    <SolidColorBrush x:Key="BlueColor" Color="#FF295EA4"/>
     <SolidColorBrush x:Key="OrangeColor" Color="#FFFB9F42"/>
     <SolidColorBrush x:Key="LightPurpleColor" Color="#FF7C2CFD"/>
     <SolidColorBrush x:Key="PurpleColor" Color="#FF5C1EBC"/>
@@ -150,8 +153,6 @@
     <Style TargetType="DataGridRow">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Height" Value="29"/>
-
-
     </Style>
 
 </ResourceDictionary>
