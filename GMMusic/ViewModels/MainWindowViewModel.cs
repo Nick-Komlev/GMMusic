@@ -392,7 +392,12 @@ namespace GMMusic.ViewModels
 
         public void OnAddTagCommandExecuted(object p)
         {
-            
+            Tag tag = p as Tag;
+            TagEditor tagEdit = new TagEditor();
+            if (tagEdit.ShowDialog() == true)
+            {
+                Tags.Add(tagEdit.)
+            }
         }
 
         #endregion

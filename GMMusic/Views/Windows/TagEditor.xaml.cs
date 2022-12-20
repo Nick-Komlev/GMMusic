@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GMMusic.ViewModels;
+using GMMusic.Models;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GMMusic
 {
@@ -22,7 +12,17 @@ namespace GMMusic
         public TagEditor()
         {
             InitializeComponent();
+            TagEditorViewModel view = DataContext as TagEditorViewModel;
+            view.ThisTag = new Tag();
         }
+
+        public TagEditor(Tag tag)
+        {
+            InitializeComponent();
+            TagEditorViewModel view = DataContext as TagEditorViewModel;
+            view.ThisTag = tag;
+        }
+
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
