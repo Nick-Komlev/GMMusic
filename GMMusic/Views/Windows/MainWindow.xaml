@@ -167,7 +167,7 @@
                     <DockPanel Grid.Column="1">
                         <UniformGrid Columns="2" Height="30" Margin="2" DockPanel.Dock="Top">
                             <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
-                                <Button>
+                                <Button Command="{Binding AddTagCommand}">
                                     <fa:ImageAwesome Icon="Regular_PlusSquare" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
                                 <Button>

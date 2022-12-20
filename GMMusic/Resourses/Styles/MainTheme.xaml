@@ -10,6 +10,7 @@
     <SolidColorBrush x:Key="GreenColor" Color="#FF167941"/>
     <SolidColorBrush x:Key="BlueColor" Color="#FF295EA4"/>
     <SolidColorBrush x:Key="OrangeColor" Color="#FFFB9F42"/>
+    <SolidColorBrush x:Key="DarkOrangeColor" Color="#FFDB7F22"/>
     <SolidColorBrush x:Key="LightPurpleColor" Color="#FF7C2CFD"/>
     <SolidColorBrush x:Key="PurpleColor" Color="#FF5C1EBC"/>
     <SolidColorBrush x:Key="DarkPurpleColor" Color="#FF503C7B"/>

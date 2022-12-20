@@ -79,13 +79,13 @@
 
     <DataTemplate x:Key="TagDataTemplate" DataType="m:Tag">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-              Background="{StaticResource YellowColor}">
-            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
+              Background="Transparent">
+            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14" Foreground="{StaticResource WhiteColor}"/>
             <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagAddCommand}" 
                     CommandParameter="{Binding Name}"
-                    Background="{StaticResource YellowColor}"
+                    Background="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}}"
                     BorderThickness="0">
-                <fa:ImageAwesome Icon="Solid_PlusSquare" Height="16"/>
+                <fa:ImageAwesome Icon="Solid_PlusSquare" Height="16" Foreground="{StaticResource WhiteColor}"/>
             </Button>
         </StackPanel>
     </DataTemplate>
@@ -117,7 +117,7 @@
                 <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Color}" Value="Желтый - Событие">
-                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+                <Setter Property="Background" Value="{StaticResource DarkOrangeColor}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Color}" Value="Синий - Настроение">
                 <Setter Property="Background" Value="{StaticResource BlueColor}"/>
@@ -126,14 +126,14 @@
     </Style>
 
     <DataTemplate x:Key="SelectedTagDataTemplate" DataType="m:Tag">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-              Background="{StaticResource YellowColor}">
-            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"
+              Background="Transparent">
+            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14" Foreground="{StaticResource WhiteColor}"/>
             <Button Command="{Binding ElementName=mainWindow, Path=DataContext.TagDeleteCommand}" 
                     CommandParameter="{Binding Name}"
-                    Background="{StaticResource YellowColor}"
+                    Background="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}}"
                     BorderThickness="0">
-                <fa:ImageAwesome Icon="Solid_MinusSquare" Height="16"/>
+                <fa:ImageAwesome Icon="Solid_MinusSquare" Height="16" Foreground="{StaticResource WhiteColor}"/>
             </Button>
         </StackPanel>
     </DataTemplate>
@@ -165,7 +165,7 @@
                 <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Color}" Value="Желтый - Событие">
-                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+                <Setter Property="Background" Value="{StaticResource DarkOrangeColor}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Color}" Value="Синий - Настроение">
                 <Setter Property="Background" Value="{StaticResource BlueColor}"/>
@@ -175,13 +175,12 @@
 
     <DataTemplate x:Key="ButtonlessTagDataTemplate" DataType="m:Tag">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" 
-              Background="{StaticResource YellowColor}">
-            <TextBox x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14" 
-                     IsReadOnly="True" Focusable="False" Background="{StaticResource YellowColor}" BorderThickness="0"/>
+              Background="Transparent">
+            <TextBlock x:Name="TagName" Text="{Binding Name}" Padding="5,2" FontSize="14" Foreground="{StaticResource WhiteColor}"/>
             <Button 
-                    Background="{StaticResource YellowColor}"
+                    Background="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}}"
                     BorderThickness="0">
-                <fa:ImageAwesome Icon="Regular_Edit" Height="16"/>
+                <fa:ImageAwesome Icon="Regular_Edit" Height="16" Foreground="{StaticResource WhiteColor}"/>
             </Button>
         </StackPanel>
     </DataTemplate>
@@ -213,7 +212,7 @@
                 <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Color}" Value="Желтый - Событие">
-                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+                <Setter Property="Background" Value="{StaticResource DarkOrangeColor}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Color}" Value="Синий - Настроение">
                 <Setter Property="Background" Value="{StaticResource BlueColor}"/>

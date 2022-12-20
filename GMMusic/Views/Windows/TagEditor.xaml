@@ -14,49 +14,40 @@
         <vm:TagEditorViewModel/>
     </Window.DataContext>
     <StackPanel Orientation="Vertical" Background="{StaticResource BlackColor}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-        <TextBlock Text="Имя тэга: " Foreground="{StaticResource WhiteColor}" HorizontalAlignment="Center"/>
-        <TextBox x:Name="TagName" Text="{Binding ThisTag.Name}" Foreground="{StaticResource WhiteColor}" TextAlignment="Center" Margin="15,5"/>
-        <TextBlock Text="Цвет тэга: " Foreground="{StaticResource WhiteColor}" HorizontalAlignment="Center" Margin="0,15,0,5"/>
-        <ComboBox Text="{Binding ThisTag.Color}" Margin="70,0" IsEditable="False">
+        <TextBlock Text="Имя тэга: " Foreground="{StaticResource WhiteColor}" HorizontalAlignment="Center" FontSize="14"/>
+        <TextBox x:Name="TagName" Text="{Binding ThisTag.Name}" Foreground="{StaticResource WhiteColor}" TextAlignment="Center" Margin="15,5" FontSize="14"/>
+        <TextBlock Text="Цвет тэга: " Foreground="{StaticResource WhiteColor}" HorizontalAlignment="Center" Margin="0,15,0,5" FontSize="14"/>
+        <ComboBox Text="{Binding ThisTag.Color}" Margin="50,0" IsEditable="False" Foreground="{StaticResource BlackColor}" FontSize="14">
             <ComboBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Background="{StaticResource BlackColor}">
                     </StackPanel>
                 </ItemsPanelTemplate>
             </ComboBox.ItemsPanel>
-            <ComboBoxItem HorizontalAlignment="Center" Background="{StaticResource GreenColor}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBlock Text="Зеленый - Локация" Foreground="{StaticResource WhiteColor}" Padding="12,4"/>
-                </StackPanel>
+            <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource GreenColor}" Padding="32,4">
+                Зеленый - Локация
             </ComboBoxItem>
-            <ComboBoxItem HorizontalAlignment="Center" Background="{StaticResource OrangeColor}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Желтый - Событие" Foreground="{StaticResource WhiteColor}" Padding="14,4"/>
-                </StackPanel>
+
+            <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource DarkOrangeColor}" Padding="34,4">
+                Желтый - Событие
             </ComboBoxItem>
-            <ComboBoxItem HorizontalAlignment="Center" Background="{StaticResource BlueColor}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Синий - Настроение" Foreground="{StaticResource WhiteColor}" Padding="10,4"/>
-                </StackPanel>
+            <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource BlueColor}" Padding="29,4">
+                Синий - Настроение
             </ComboBoxItem>
-            <ComboBoxItem HorizontalAlignment="Center">
-                <StackPanel Orientation="Horizontal" Background="{StaticResource RedColor}">
-                    <TextBlock Text="Красный - Этнос" Foreground="{StaticResource WhiteColor}" Padding="21,4"/>
-                </StackPanel>
+            <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource RedColor}" Padding="41,4">
+                Красный - Этнос
             </ComboBoxItem>
-            <ComboBoxItem HorizontalAlignment="Center">
-                <StackPanel Orientation="Horizontal" Background="{StaticResource PurpleColor}">
-                    <TextBlock Text="Фиолетовый - Жанр" Foreground="{StaticResource WhiteColor}" Padding="11,4"/>
-                </StackPanel>
+            <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource PurpleColor}" Padding="30,4">
+                Фиолетовый - Жанр
             </ComboBoxItem>
         </ComboBox>
 
-        <Button Margin="15,25,15,0" Click="Accept_Click"
+        <Button Margin="15,25,15,0" Click="Accept_Click" FontSize="14"
                 Background="{StaticResource DarkPurpleColor}" 
                 Foreground="{StaticResource WhiteColor}" 
                 Content="Ок"/>
 
-        <Button Margin="15,8,15,0" Click="Cancel_Click"
+        <Button Margin="15,8,15,0" Click="Cancel_Click" FontSize="14"
                 Foreground="{StaticResource WhiteColor}" 
                 Content="Отмена"/>
     </StackPanel>

@@ -344,7 +344,7 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Команда добавления нового трэка
+        #region Команда создания нового трэка
 
         public ICommand AddTrackCommand { get; set; }
 
@@ -384,7 +384,7 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Команда сохранения изменений треков
+        #region Команда создания нового тэга
 
         public ICommand AddTagCommand { get; set; }
 
@@ -396,7 +396,10 @@ namespace GMMusic.ViewModels
             TagEditor tagEdit = new TagEditor();
             if (tagEdit.ShowDialog() == true)
             {
-                Tags.Add(tagEdit.)
+                if (Tags.FirstOrDefault(t => t.Name == tagEdit.ThisTag.Name) == null)
+                {
+                    Tags.Add(tagEdit.ThisTag);
+                }
             }
         }
 
@@ -421,6 +424,8 @@ namespace GMMusic.ViewModels
             AddTrackCommand = new LambdaCommand(OnAddTrackCommandExecuted, CanAddTrackCommandExecute);
             AllowTrackDeleteCommand = new LambdaCommand(OnAllowTrackDeleteCommandExecuted, CanAllowTrackDeleteCommandExecute);
             DeleteTrackCommand = new LambdaCommand(OnDeleteTrackCommandExecuted, CanDeleteTrackCommandExecute);
+            AddTagCommand = new LambdaCommand(OnAddTagCommandExecuted, CanAddTagCommandExecute);
+
         }
 
     }

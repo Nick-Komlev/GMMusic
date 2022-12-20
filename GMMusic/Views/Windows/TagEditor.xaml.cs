@@ -9,20 +9,23 @@ namespace GMMusic
     /// </summary>
     public partial class TagEditor : Window
     {
+        public Tag ThisTag;
+
         public TagEditor()
         {
             InitializeComponent();
             TagEditorViewModel view = DataContext as TagEditorViewModel;
-            view.ThisTag = new Tag();
+            ThisTag = new Tag("Новый тэг", "Зеленый - Локация");
+            view.ThisTag = ThisTag;
         }
 
         public TagEditor(Tag tag)
         {
             InitializeComponent();
             TagEditorViewModel view = DataContext as TagEditorViewModel;
-            view.ThisTag = tag;
+            ThisTag = tag;
+            view.ThisTag = ThisTag;
         }
-
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
