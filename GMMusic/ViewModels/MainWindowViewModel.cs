@@ -164,6 +164,8 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        //=========   Команды ============
+
         #region Команда добавления выбранного трэка в плейлист медиаплеера
 
         public ICommand TrackAddCommand { get; set; }
@@ -378,6 +380,19 @@ namespace GMMusic.ViewModels
             DBController.Tracks = Tracks;
             DBController.SaveTrackChanges(DeletedTracks);
             State = "Изменения сохранены!";
+        }
+
+        #endregion
+
+        #region Команда сохранения изменений треков
+
+        public ICommand AddTagCommand { get; set; }
+
+        public bool CanAddTagCommandExecute(object p) => true;
+
+        public void OnAddTagCommandExecuted(object p)
+        {
+            
         }
 
         #endregion

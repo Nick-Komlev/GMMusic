@@ -106,6 +106,23 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Color}" Value="Зеленый - Локация">
+                <Setter Property="Background" Value="{StaticResource GreenColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Красный - Этнос">
+                <Setter Property="Background" Value="{StaticResource RedColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Фиолетовый - Жанр">
+                <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Желтый - Событие">
+                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Синий - Настроение">
+                <Setter Property="Background" Value="{StaticResource BlueColor}"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <DataTemplate x:Key="SelectedTagDataTemplate" DataType="m:Tag">
@@ -137,6 +154,23 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Color}" Value="Зеленый - Локация">
+                <Setter Property="Background" Value="{StaticResource GreenColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Красный - Этнос">
+                <Setter Property="Background" Value="{StaticResource RedColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Фиолетовый - Жанр">
+                <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Желтый - Событие">
+                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Синий - Настроение">
+                <Setter Property="Background" Value="{StaticResource BlueColor}"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <DataTemplate x:Key="ButtonlessTagDataTemplate" DataType="m:Tag">
@@ -168,6 +202,22 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Color}" Value="Зеленый - Локация">
+                <Setter Property="Background" Value="{StaticResource GreenColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Красный - Этнос">
+                <Setter Property="Background" Value="{StaticResource RedColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Фиолетовый - Жанр">
+                <Setter Property="Background" Value="{StaticResource PurpleColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Желтый - Событие">
+                <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Color}" Value="Синий - Настроение">
+                <Setter Property="Background" Value="{StaticResource BlueColor}"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
-
 </ResourceDictionary>

@@ -199,7 +199,6 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Плейлисты"></TabItem>
-            <TabItem Header="Тэги"></TabItem>
         </TabControl>
     </DockPanel>
 

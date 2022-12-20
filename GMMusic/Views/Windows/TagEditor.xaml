@@ -1,0 +1,63 @@
+﻿<Window x:Class="GMMusic.TagEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:l="clr-namespace:GMMusic"
+        xmlns:vm="clr-namespace:GMMusic.ViewModels"
+        xmlns:uc="clr-namespace:GMMusic.Views.UserControls"
+        xmlns:m="clr-namespace:GMMusic.Models"
+        xmlns:db="clr-namespace:GMMusic.Infrastructure"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="250" Width="300" WindowStartupLocation="CenterScreen" Background="{StaticResource BlackColor}">
+    <Window.DataContext>
+        <vm:TagEditorViewModel/>
+    </Window.DataContext>
+    <StackPanel Orientation="Vertical" Background="{StaticResource BlackColor}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <TextBlock Text="Имя тэга: " Foreground="{StaticResource WhiteColor}" HorizontalAlignment="Center"/>
+        <TextBox x:Name="TagName" Text="{Binding ThisTag.Name}" Foreground="{StaticResource WhiteColor}" TextAlignment="Center" Margin="15,5"/>
+        <TextBlock Text="Цвет тэга: " Foreground="{StaticResource WhiteColor}" HorizontalAlignment="Center" Margin="0,15,0,5"/>
+        <ComboBox Text="{Binding ThisTag.Color}" Margin="70,0" IsEditable="False">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="{StaticResource BlackColor}">
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+            <ComboBoxItem HorizontalAlignment="Center" Background="{StaticResource GreenColor}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Зеленый - Локация" Foreground="{StaticResource WhiteColor}" Padding="12,4"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem HorizontalAlignment="Center" Background="{StaticResource OrangeColor}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Желтый - Событие" Foreground="{StaticResource WhiteColor}" Padding="14,4"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem HorizontalAlignment="Center" Background="{StaticResource BlueColor}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Синий - Настроение" Foreground="{StaticResource WhiteColor}" Padding="10,4"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Background="{StaticResource RedColor}">
+                    <TextBlock Text="Красный - Этнос" Foreground="{StaticResource WhiteColor}" Padding="21,4"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Background="{StaticResource PurpleColor}">
+                    <TextBlock Text="Фиолетовый - Жанр" Foreground="{StaticResource WhiteColor}" Padding="11,4"/>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+
+        <Button Margin="15,25,15,0" Click="Accept_Click"
+                Background="{StaticResource DarkPurpleColor}" 
+                Foreground="{StaticResource WhiteColor}" 
+                Content="Ок"/>
+
+        <Button Margin="15,8,15,0" Click="Cancel_Click"
+                Foreground="{StaticResource WhiteColor}" 
+                Content="Отмена"/>
+    </StackPanel>
+</Window>
