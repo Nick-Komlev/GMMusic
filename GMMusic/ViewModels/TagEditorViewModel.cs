@@ -41,44 +41,6 @@ namespace GMMusic.ViewModels
 
         #endregion
 
-        #region Свойство первоначального имени тэга
-
-        private string _PrevName;
-
-        /// <summary>Первоначальное имя</summary>
-
-        public string PrevName
-        {
-            get => _PrevName;
-            set => Set(ref _PrevName, value);
-        }
-
-        #endregion
-
-        #region Свойство первоначального цвета тэга
-
-        private string _PrevColor;
-
-        /// <summary>Первоначальный цвет</summary>
-
-        public string PrevColor
-        {
-            get => _PrevColor;
-            set => Set(ref _PrevColor, value);
-        }
-
-        #endregion
-
-        public TagEditorViewModel()
-        {
-
-        }
-
-        public TagEditorViewModel(Tag tag) 
-        {
-            ThisTag = tag;
-            PrevName = tag.Name;
-            _PrevColor = tag.Color;
-        }
+        public TagEditorViewModel() { }
     }
 }

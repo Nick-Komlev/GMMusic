@@ -36,6 +36,7 @@ namespace GMMusic.Models
 
         public Tag(string name, string color) 
         {
+            Id = -1;
             Name = name;
             Color = color;
         }
@@ -43,6 +44,12 @@ namespace GMMusic.Models
         public override string ToString()
         {
             return Name;
+        }
+
+        public void Copy(Tag tag)
+        {
+            Name = tag.Name;
+            Color = tag.Color;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)

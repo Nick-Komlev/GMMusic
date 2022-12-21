@@ -10,6 +10,8 @@ namespace GMMusic
     public partial class TagEditor : Window
     {
         public Tag ThisTag;
+        public string PrevName;
+        public string PrevColor;
 
         public TagEditor()
         {
@@ -25,6 +27,8 @@ namespace GMMusic
             TagEditorViewModel view = DataContext as TagEditorViewModel;
             ThisTag = tag;
             view.ThisTag = ThisTag;
+            PrevName = ThisTag.Name;
+            PrevColor = ThisTag.Color;
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)

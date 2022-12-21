@@ -47,7 +47,7 @@ namespace GMMusic.Infrastructure
                     }
                     else
                     {
-                        var t = (DBContext.Tracks.Find(track.Id));
+                        var t = DBContext.Tracks.Find(track.Id);
                         t.Copy(track);
                     }
                 }
@@ -63,9 +63,32 @@ namespace GMMusic.Infrastructure
             }
         }
 
-        public static void SaveTagChanges()
+        public static void SaveTagChanges(List<Tag> delTags)
         {
+            using (DBContext = new MyDBContext())
+            {
+                foreach (Tag tag in Tags)
+                {
+                    if (tag.Id == -1)
+                    {
+                        DBContext.Tags.Add(tag);
+                    }
+                    else
+                    {
+                        var t = DBContext.Tags.Find(tag.Id);
+                        t.Copy(tag);
+                    }
+                }
+                if (delTags.Count > 0)
+                {
+                    foreach (Tag tag in delTags)
+                    {
+                        DBContext.Tags.Remove(DBContext.Tags.Find(tag.Id));
+                    }
 
+                }
+                DBContext.SaveChanges();
+            }
         }
 
         public static void SavePlaylistChanges()

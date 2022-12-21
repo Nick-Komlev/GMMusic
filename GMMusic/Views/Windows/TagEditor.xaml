@@ -27,7 +27,6 @@
             <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource GreenColor}" Padding="32,4">
                 Зеленый - Локация
             </ComboBoxItem>
-
             <ComboBoxItem HorizontalAlignment="Center" Foreground="{StaticResource WhiteColor}" Background="{StaticResource DarkOrangeColor}" Padding="34,4">
                 Желтый - Событие
             </ComboBoxItem>

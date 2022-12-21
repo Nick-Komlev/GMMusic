@@ -17,7 +17,8 @@ namespace GMMusic.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        public List<Track> DeletedTracks; 
+        public List<Track> DeletedTracks;
+        public List<Tag> DeletedTags;
 
         #region Свойство заголовока окна
 
@@ -152,7 +153,7 @@ namespace GMMusic.ViewModels
 
         #region Свойство активации кнопок удаления трэков
 
-        private bool _CanDeleteTrack;
+        private bool _CanDeleteTrack = false;
 
         /// <summary>Флаг возможности удаления трэков</summary>
 
@@ -160,6 +161,20 @@ namespace GMMusic.ViewModels
         {
             get => _CanDeleteTrack;
             set => Set(ref _CanDeleteTrack, value);
+        }
+
+        #endregion
+
+        #region Свойство активации кнопок удаления тэгов
+
+        private bool _CanDeleteTag = false;
+
+        /// <summary>Флаг возможности удаления трэков</summary>
+
+        public bool CanDeleteTag
+        {
+            get => _CanDeleteTag;
+            set => Set(ref _CanDeleteTag, value);
         }
 
         #endregion
@@ -192,11 +207,10 @@ namespace GMMusic.ViewModels
 
         public void OnTagAddCommandExecuted(object p)
         {
-            var tag = Tags.First(t => t.Name == p.ToString());
+            Tag tag = p as Tag;
             if (!SelectedTags.Contains(tag))
             {
                 SelectedTags.Add(tag);
-                OnPropertyChanged(nameof(SelectedTags));
             }
 
         }
@@ -211,10 +225,8 @@ namespace GMMusic.ViewModels
 
         public void OnTagDeleteCommandExecuted(object p)
         {
-            var tag = SelectedTags.First(t => t.Name == p.ToString());
+            Tag tag = p as Tag;
             SelectedTags.Remove(tag);
-            OnPropertyChanged(nameof(SelectedTags));
-
         }
 
         #endregion
@@ -251,6 +263,19 @@ namespace GMMusic.ViewModels
         public void OnAllowTrackDeleteCommandExecuted(object p)
         {
             CanDeleteTrack = !CanDeleteTrack;
+        }
+
+        #endregion
+
+        #region Команда управления активации кнопок удаления тэгов
+
+        public ICommand AllowTagDeleteCommand { get; set; }
+
+        public bool CanAllowTagDeleteCommandExecute(object p) => true;
+
+        public void OnAllowTagDeleteCommandExecuted(object p)
+        {
+            CanDeleteTag = !CanDeleteTag;
         }
 
         #endregion
@@ -392,7 +417,6 @@ namespace GMMusic.ViewModels
 
         public void OnAddTagCommandExecuted(object p)
         {
-            Tag tag = p as Tag;
             TagEditor tagEdit = new TagEditor();
             if (tagEdit.ShowDialog() == true)
             {
@@ -405,12 +429,78 @@ namespace GMMusic.ViewModels
 
         #endregion
 
+        #region Команда изменения  тэга
+
+        public ICommand EditTagCommand { get; set; }
+
+        public bool CanEditTagCommandExecute(object p) => true;
+
+        public void OnEditTagCommandExecuted(object p)
+        {
+            Tag tag = p as Tag;
+            TagEditor tagEdit = new TagEditor(tag);
+            if (tagEdit.ShowDialog() == false)
+            {
+                tag.Name = tagEdit.PrevName;
+                tag.Color = tagEdit.PrevColor;
+            }
+            else 
+            {
+                try
+                {
+                    Tags.SingleOrDefault(t => tag.Name == t.Name);
+                }
+                catch
+                {
+                    tag.Name = tagEdit.PrevName;
+                    tag.Color = tagEdit.PrevColor;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Команда сохранения изменений тэгов
+
+        public ICommand SaveTagCommand { get; set; }
+
+        public bool CanSaveTagCommandExecute(object p) => true;
+
+        public void OnSaveTagCommandExecuted(object p)
+        {
+            State = "Изменения сохраняются...";
+            DBController.Tags = Tags;
+            DBController.SaveTagChanges(DeletedTags);
+            State = "Изменения сохранены!";
+        }
+
+        #endregion
+
+        #region Команда удаления тэга
+
+        public ICommand DeleteTagCommand { get; set; }
+
+        public bool CanDeleteTagCommandExecute(object p) => true;
+
+        public void OnDeleteTagCommandExecuted(object p)
+        {
+            Tag t = p as Tag;
+            Tags.Remove(t);
+            if (t.Id > -1)
+            {
+                DeletedTags.Add(t);
+            }
+        }
+
+        #endregion
+
         public MainWindowViewModel()
         {
             Tracks = new ObservableCollection<Track>(DBController.Tracks);
             Tags = new ObservableCollection<Tag>(DBController.Tags);
             Playlists = new ObservableCollection<Playlist>(DBController.Playlists);
             DeletedTracks = new List<Track>();
+            DeletedTags = new List<Tag>();
 
             SelectedTrackMediaPlayer = MediaPlayers[0];
             TrackAddCommand = new LambdaCommand(OnTrackAddCommandExecuted, CanTrackAddCommandExecute);
@@ -423,8 +513,12 @@ namespace GMMusic.ViewModels
             ChooseFileTrackCommand = new LambdaCommand(OnChooseFileTrackCommandExecuted, CanChooseFileTrackCommandExecute);
             AddTrackCommand = new LambdaCommand(OnAddTrackCommandExecuted, CanAddTrackCommandExecute);
             AllowTrackDeleteCommand = new LambdaCommand(OnAllowTrackDeleteCommandExecuted, CanAllowTrackDeleteCommandExecute);
+            AllowTagDeleteCommand = new LambdaCommand(OnAllowTagDeleteCommandExecuted, CanAllowTagDeleteCommandExecute);
             DeleteTrackCommand = new LambdaCommand(OnDeleteTrackCommandExecuted, CanDeleteTrackCommandExecute);
             AddTagCommand = new LambdaCommand(OnAddTagCommandExecuted, CanAddTagCommandExecute);
+            SaveTagCommand = new LambdaCommand(OnSaveTagCommandExecuted, CanSaveTagCommandExecute);
+            DeleteTagCommand = new LambdaCommand(OnDeleteTagCommandExecuted, CanDeleteTagCommandExecute);
+            EditTagCommand = new LambdaCommand(OnEditTagCommandExecuted, CanEditTagCommandExecute);
 
         }
 

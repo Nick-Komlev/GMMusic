@@ -170,10 +170,10 @@
                                 <Button Command="{Binding AddTagCommand}">
                                     <fa:ImageAwesome Icon="Regular_PlusSquare" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
-                                <Button>
+                                <Button Command="{Binding AllowTagDeleteCommand}">
                                     <fa:ImageAwesome Icon="Regular_TrashAlt" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
-                                <Button  Command="{Binding SaveCommand}">
+                                <Button  Command="{Binding SaveTagCommand}">
                                     <fa:ImageAwesome Icon="Regular_Save" Height="20" Foreground="{StaticResource WhiteColor}"/>
                                 </Button>
                             </StackPanel>
@@ -189,7 +189,7 @@
                         <ListBox 
                              ItemsSource="{Binding Tags}"
                              Style="{StaticResource TagListStyle}"
-                             ItemContainerStyle="{StaticResource ButtonlessTagListContainerStyle}"
+                             ItemContainerStyle="{StaticResource EditableTagListContainerStyle}"
                              Height="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, 
                                                                                      AncestorType=Grid, 
                                                                                      AncestorLevel=1}}">
