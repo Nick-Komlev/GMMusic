@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GMMusic.Models
 {
@@ -13,6 +14,20 @@ namespace GMMusic.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; set; }
+
+        private double _CurrentPosition = 0;
+        public double CurrentPosition
+        {
+            get => _CurrentPosition;
+            set
+            {
+                double v = !(CurrentTrack is null) ? (value / CurrentTrack.Duration.TotalSeconds) * 1000 : 0;
+                Set(ref _CurrentPosition, v);
+            }
+        }
+
+        private DispatcherTimer Timer = new DispatcherTimer();
+
         private Track _CurrentTrack;
         public Track CurrentTrack 
         {
@@ -54,6 +69,13 @@ namespace GMMusic.Models
         {
             Id = id;
             MediaEnded += MyMediaPlayer_MediaEnded;
+            Timer.Tick += Tick;
+            Timer.Interval = new TimeSpan(0, 0, 0, 0, 5);
+        }
+
+        private void Tick(object sender, EventArgs e)
+        {
+            CurrentPosition = Position.TotalSeconds;
         }
 
         private void MyMediaPlayer_MediaEnded(object sender, EventArgs e)
@@ -78,7 +100,20 @@ namespace GMMusic.Models
 
         public void Open()
         {
+            CurrentPosition = 0;
             base.Open(new Uri(CurrentTrack.SourcePath));
+        }
+
+        new public void Play()
+        {
+            base.Play();
+            Timer.Start();
+        }
+
+        new public void Pause()
+        {
+            base.Pause();
+            Timer.Stop();
         }
 
         public override string ToString()

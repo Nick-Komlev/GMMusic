@@ -121,6 +121,7 @@
     <Compile Include="Behaviors\ListBoxElementDraging.cs" />
     <Compile Include="Infrastructure\Commands\BaseCommand.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
+    <Compile Include="Infrastructure\Converters\DurationConverter.cs" />
     <Compile Include="Infrastructure\DBController.cs" />
     <Compile Include="Infrastructure\MyDBContext.cs" />
     <Compile Include="Migrations\202212140831346_InitialCreate.cs" />
